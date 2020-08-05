@@ -22,7 +22,7 @@ help(package = "image.textlinedetector")
 
 ## Example
 
-![](https://raw.githubusercontent.com/DIGIT-VUB/image.textlinedetector/master/inst/extdata/example-result.png?raw=true)
+![](https://raw.githubusercontent.com/DIGI-VUB/image.textlinedetector/master/inst/extdata/example-result.png)
 
 ```{r}
 library(opencv)
