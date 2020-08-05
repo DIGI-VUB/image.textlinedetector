@@ -1,0 +1,22 @@
+Package: image.textlinedetector
+Type: Package
+Title: Segment Images in Text Lines and Words
+Version: 0.1.0
+Maintainer: Jan Wijffels <jan.wijffels@vub.be>
+Authors@R: c(
+    person('Jan', 'Wijffels', role = c('aut', 'cre', 'cph'), email = 'jan.wijffels@vub.be', comment = "R wrapper"), 
+    person('Vrije Universiteit Brussel - DIGI: Brussels Platform for Digital Humanities', role = 'cph', comment = "R wrapper"),
+    person("Jeroen", "Ooms", role = c("ctb", "cph"), comment = "More details in LICENSE.note file"),
+    person("Arthur Flôr", role = c("ctb", "cph"), comment = "More details in LICENSE.note file"))
+Description: Find text lines in scanned images and segment the lines into words.
+    Wraps the C++ library available at <https://github.com/arthurflor23/text-segmentation>. 
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Imports:
+    Rcpp (>= 0.12.9)
+Suggests:
+    image.binarization
+LinkingTo: Rcpp
+SystemRequirements: C++11
+RoxygenNote: 7.1.0
