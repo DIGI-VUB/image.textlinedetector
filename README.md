@@ -12,7 +12,12 @@ The algorithm in this R package follows the following techniques:
 
 ### Installation
 
-- For installing the development version of this package: `remotes::install_github("DIGI-VUB/image.textlinedetector")`
+- For installing the development version of this package: 
+
+```
+install.packages("opencv")
+remotes::install_github("DIGI-VUB/image.textlinedetector")
+```
 
 Look to the documentation of the functions
 
