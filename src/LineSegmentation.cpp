@@ -427,7 +427,7 @@ void Chunk::calculateHistogram() {
 int Chunk::findPeaksValleys(map<int, Valley *> &mapValley) {
     this->calculateHistogram();
 
-    for (unsigned int i=1; i+1<this->histogram.size(); i++) {
+    for (int i=1; i+1 < ((int)(this->histogram.size())); i++) {
         int leftVal = this->histogram[i-1], centreVal = this->histogram[i], rightVal = this->histogram[i+1];
 
         if (centreVal >= leftVal && centreVal >= rightVal) {
@@ -459,7 +459,7 @@ int Chunk::findPeaksValleys(map<int, Valley *> &mapValley) {
     peaks = newPeaks;
 
     sort(peaks.begin(), peaks.end());
-    peaks.resize(linesCount + 1 <= peaks.size() ? (unsigned long) linesCount + 1 : peaks.size());
+    peaks.resize(linesCount + 1 <= ((int)(peaks.size())) ? (unsigned long) linesCount + 1 : ((int)(peaks.size())));
     sort(peaks.begin(), peaks.end(), Peak::comp);
 
     for (unsigned int i=1; i<peaks.size(); i++) {
