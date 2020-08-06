@@ -40,10 +40,13 @@ img <- textlinedetector_resize(img)
 img <- textlinedetector_binarization(img)
 textlines <- textlinedetector_linesegmentation(img)
 textlines$n
-textlines$imagelines
-textwords <- textlinedetector_wordsegmentation(textlines$textlines[[1]])
+textlines$overview
+textlines$textlines[[1]]
+textwords <- textlinedetector_wordsegmentation(textlines$textlines[[6]])
 textwords$n
-textwords$words[[1]]
+textwords$overview
+textwords$words[[2]]
+textwords$words[[3]]
 ```
 
 ### DIGI
