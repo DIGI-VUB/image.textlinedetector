@@ -18,6 +18,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cvmat_bw
+XPtrMat cvmat_bw(Rcpp::RawVector img, int width, int height);
+RcppExport SEXP _image_textlinedetector_cvmat_bw(SEXP imgSEXP, SEXP widthSEXP, SEXP heightSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type img(imgSEXP);
+    Rcpp::traits::input_parameter< int >::type width(widthSEXP);
+    Rcpp::traits::input_parameter< int >::type height(heightSEXP);
+    rcpp_result_gen = Rcpp::wrap(cvmat_bw(img, width, height));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cvmat_destroy
 void cvmat_destroy(XPtrMat image);
 RcppExport SEXP _image_textlinedetector_cvmat_destroy(SEXP imageSEXP) {
@@ -205,14 +218,14 @@ BEGIN_RCPP
 END_RCPP
 }
 // textlinedetector_resize
-XPtrMat textlinedetector_resize(XPtrMat ptr, int newW);
-RcppExport SEXP _image_textlinedetector_textlinedetector_resize(SEXP ptrSEXP, SEXP newWSEXP) {
+XPtrMat textlinedetector_resize(XPtrMat ptr, int width);
+RcppExport SEXP _image_textlinedetector_textlinedetector_resize(SEXP ptrSEXP, SEXP widthSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrMat >::type ptr(ptrSEXP);
-    Rcpp::traits::input_parameter< int >::type newW(newWSEXP);
-    rcpp_result_gen = Rcpp::wrap(textlinedetector_resize(ptr, newW));
+    Rcpp::traits::input_parameter< int >::type width(widthSEXP);
+    rcpp_result_gen = Rcpp::wrap(textlinedetector_resize(ptr, width));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -262,6 +275,7 @@ END_RCPP
 
 static const R_CallMethodDef CallEntries[] = {
     {"_image_textlinedetector_cvmat_bgr", (DL_FUNC) &_image_textlinedetector_cvmat_bgr, 3},
+    {"_image_textlinedetector_cvmat_bw", (DL_FUNC) &_image_textlinedetector_cvmat_bw, 3},
     {"_image_textlinedetector_cvmat_destroy", (DL_FUNC) &_image_textlinedetector_cvmat_destroy, 1},
     {"_image_textlinedetector_cvmat_dead", (DL_FUNC) &_image_textlinedetector_cvmat_dead, 1},
     {"_image_textlinedetector_cvmat_size", (DL_FUNC) &_image_textlinedetector_cvmat_size, 1},
