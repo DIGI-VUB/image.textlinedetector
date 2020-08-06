@@ -22,7 +22,8 @@ XPtrMat textlinedetector_crop(XPtrMat ptr){
 
 //' @export
 // [[Rcpp::export]]
-XPtrMat textlinedetector_resize(XPtrMat ptr, int newW = 1280){
+XPtrMat textlinedetector_resize(XPtrMat ptr, int width = 1280){
+  int newW = width;
   cv::Mat imageCropped = get_mat(ptr);
   
   int newH = ((newW * imageCropped.rows) / imageCropped.cols);
@@ -53,14 +54,47 @@ Rcpp::List textlinedetector_linesegmentation(XPtrMat ptr, int chunksNumber = 8, 
   line->segment(imageLines, lines, chunksNumber, chunksProcess);
 
   Rcpp::List textlines(lines.size());
-  for (int i=0; i<lines.size(); i++) {
+  for (unsigned int i=0; i<lines.size(); i++) {
     textlines[i] = cvmat_xptr(lines[i]);
   }
-  
+  /*
+  // Get region x/y locations
+  unsigned int regions_nr = line->lineRegions.size();
+  Rcpp::List coords(regions_nr);
+  for (unsigned int i=0; i<regions_nr; i++) {
+    std::vector<int> top_x;
+    std::vector<int> top_y;
+    std::vector<int> bottom_x;
+    std::vector<int> bottom_y;    
+
+    auto region = line->lineRegions[i];
+    Line top    = *region->top;
+    Line bottom = *region->bottom;
+    
+    for (auto point : region->top->points) {
+      top_x.push_back(point->x);
+      top_y.push_back(point->y);
+    }
+
+    for (auto point : region->bottom->points) {
+      bottom_x.push_back(point->x);
+      bottom_y.push_back(point->y);  
+    }
+    coords[i] = Rcpp::List::create(Rcpp::Named("regionID") = region->regionID,  
+    Rcpp::Named("test") = top.points.size(),
+                                   Rcpp::Named("height") = region->height//,  
+                                   //Rcpp::Named("top_x")    = top_x,
+                                   //Rcpp::Named("top_y")    = top_y,
+                                   //Rcpp::Named("bottom_x") = bottom_x,
+                                   //Rcpp::Named("bottom_y") = bottom_y
+                                   );
+  }
+  */
   return Rcpp::List::create(Rcpp::Named("n") = lines.size(),
-                            Rcpp::Named("imagelines") = cvmat_xptr(imageLines),
-                            Rcpp::Named("textlines") = textlines,
-                            Rcpp::Named("example") = cvmat_xptr(lines[0]));
+                            Rcpp::Named("overview") = cvmat_xptr(imageLines),
+                            Rcpp::Named("textlines") = textlines//,
+                            //Rcpp::Named("coords") = coords
+                            );
 }
 
 //' @export
@@ -68,7 +102,6 @@ Rcpp::List textlinedetector_linesegmentation(XPtrMat ptr, int chunksNumber = 8, 
 Rcpp::List textlinedetector_wordsegmentation(XPtrMat ptr, int kernelSize = 11, int sigma = 11, int theta = 7){
   cv::Mat textlineimg = get_mat(ptr);
   
-  // START Step 4: word segmentation //
   WordSegmentation *word = new WordSegmentation();
   cv::Mat summary;
   word->setKernel(kernelSize, sigma, theta);
@@ -76,14 +109,12 @@ Rcpp::List textlinedetector_wordsegmentation(XPtrMat ptr, int kernelSize = 11, i
   std::vector<cv::Mat> words;
   word->segment(textlineimg, words);
     
-  //summary.push_back(words[0]);
-  //words.erase(words.begin());
   Rcpp::List tokens(words.size());
-  for (int i=0; i<words.size(); i++) {
-    tokens[i] = cvmat_xptr(words[i]);
+  for (unsigned int i=1; i<words.size(); i++) {
+    tokens[i-1] = cvmat_xptr(words[i]);
   }
   
-  return Rcpp::List::create(Rcpp::Named("n") = words.size(),
-                            Rcpp::Named("words") = tokens,
-                            Rcpp::Named("example") = cvmat_xptr(words[0]));
+  return Rcpp::List::create(Rcpp::Named("n") = words.size() - 1,
+                            Rcpp::Named("overview") = cvmat_xptr(words[0]),
+                            Rcpp::Named("words") = tokens);
 }

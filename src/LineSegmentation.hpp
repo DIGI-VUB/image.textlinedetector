@@ -18,7 +18,7 @@ class Line {
         friend class LineSegmentation;
         friend class Region;
 
-    private:
+    //private:
         Region *above;
         Region *below;
         vector<valleyID> valleysID;
@@ -63,7 +63,7 @@ class Region {
         Region(Line *top, Line *bottom);
         friend class LineSegmentation;
 
-    private:
+    //private:
         int regionID;
         Mat region;
         Line *top;
@@ -86,14 +86,14 @@ class Chunk {
         
         int findPeaksValleys(map<int, Valley *> &mapValley);
 
-    private:
+    //private:
         int index;
         int startCol;
         int width;
         Mat img;
         vector<int> histogram;
-        vector<Peak> peaks;
         vector<Valley *> valleys;
+        vector<Peak> peaks;
         int avgHeight;
         int avgWhiteHeight;
         int linesCount;
@@ -120,7 +120,7 @@ class LineSegmentation {
         void repairLines();
         void deslant(Mat image, Mat &output, int bgcolor);
 
-    private:
+    //private:
         string srcBase;
         string extension;
 

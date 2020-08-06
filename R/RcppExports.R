@@ -5,6 +5,10 @@ cvmat_bgr <- function(img, width = 0L, height = 0L) {
     .Call('_image_textlinedetector_cvmat_bgr', PACKAGE = 'image.textlinedetector', img, width, height)
 }
 
+cvmat_bw <- function(img, width = 0L, height = 0L) {
+    .Call('_image_textlinedetector_cvmat_bw', PACKAGE = 'image.textlinedetector', img, width, height)
+}
+
 cvmat_destroy <- function(image) {
     invisible(.Call('_image_textlinedetector_cvmat_destroy', PACKAGE = 'image.textlinedetector', image))
 }
@@ -75,8 +79,8 @@ textlinedetector_crop <- function(ptr) {
 }
 
 #' @export
-textlinedetector_resize <- function(ptr, newW = 1280L) {
-    .Call('_image_textlinedetector_textlinedetector_resize', PACKAGE = 'image.textlinedetector', ptr, newW)
+textlinedetector_resize <- function(ptr, width = 1280L) {
+    .Call('_image_textlinedetector_textlinedetector_resize', PACKAGE = 'image.textlinedetector', ptr, width)
 }
 
 #' @export
