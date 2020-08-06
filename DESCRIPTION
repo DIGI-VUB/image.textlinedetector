@@ -7,7 +7,10 @@ Authors@R: c(
     person('Jan', 'Wijffels', role = c('aut', 'cre', 'cph'), email = 'jan.wijffels@vub.be', comment = "R wrapper"), 
     person('Vrije Universiteit Brussel - DIGI: Brussels Platform for Digital Humanities', role = 'cph', comment = "R wrapper"),
     person("Jeroen", "Ooms", role = c("ctb", "cph"), comment = "More details in LICENSE.note file"),
-    person("Arthur Flôr", role = c("ctb", "cph"), comment = "More details in LICENSE.note file"))
+    person("Arthur Flôr", role = c("ctb", "cph"), comment = "More details in LICENSE.note file"),
+    person("Saverio Meucci", role = c("ctb", "cph"), comment = "More details in LICENSE.note file"),
+    person("Yeara Kozlov", role = c("ctb", "cph"), comment = "More details in LICENSE.note file"),
+    person("Tino Weinkauf", role = c("ctb", "cph"), comment = "More details in LICENSE.note file"))
 Description: Find text lines in scanned images and segment the lines into words.
     Wraps the C++ library available at <https://github.com/arthurflor23/text-segmentation>. 
 License: MIT + file LICENSE

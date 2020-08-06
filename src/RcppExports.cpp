@@ -206,6 +206,36 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cvmat_chop
+XPtrMat cvmat_chop(XPtrMat ptr, int x, int y, int width, int height);
+RcppExport SEXP _image_textlinedetector_cvmat_chop(SEXP ptrSEXP, SEXP xSEXP, SEXP ySEXP, SEXP widthSEXP, SEXP heightSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrMat >::type ptr(ptrSEXP);
+    Rcpp::traits::input_parameter< int >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type y(ySEXP);
+    Rcpp::traits::input_parameter< int >::type width(widthSEXP);
+    Rcpp::traits::input_parameter< int >::type height(heightSEXP);
+    rcpp_result_gen = Rcpp::wrap(cvmat_chop(ptr, x, y, width, height));
+    return rcpp_result_gen;
+END_RCPP
+}
+// textlinedetector_astarpath
+Rcpp::List textlinedetector_astarpath(XPtrMat ptr, bool morph, int step, int mfactor, bool trace);
+RcppExport SEXP _image_textlinedetector_textlinedetector_astarpath(SEXP ptrSEXP, SEXP morphSEXP, SEXP stepSEXP, SEXP mfactorSEXP, SEXP traceSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrMat >::type ptr(ptrSEXP);
+    Rcpp::traits::input_parameter< bool >::type morph(morphSEXP);
+    Rcpp::traits::input_parameter< int >::type step(stepSEXP);
+    Rcpp::traits::input_parameter< int >::type mfactor(mfactorSEXP);
+    Rcpp::traits::input_parameter< bool >::type trace(traceSEXP);
+    rcpp_result_gen = Rcpp::wrap(textlinedetector_astarpath(ptr, morph, step, mfactor, trace));
+    return rcpp_result_gen;
+END_RCPP
+}
 // textlinedetector_crop
 XPtrMat textlinedetector_crop(XPtrMat ptr);
 RcppExport SEXP _image_textlinedetector_textlinedetector_crop(SEXP ptrSEXP) {
@@ -292,6 +322,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_image_textlinedetector_livestream", (DL_FUNC) &_image_textlinedetector_livestream, 1},
     {"_image_textlinedetector_data_prefix", (DL_FUNC) &_image_textlinedetector_data_prefix, 0},
     {"_image_textlinedetector_set_num_threads", (DL_FUNC) &_image_textlinedetector_set_num_threads, 1},
+    {"_image_textlinedetector_cvmat_chop", (DL_FUNC) &_image_textlinedetector_cvmat_chop, 5},
+    {"_image_textlinedetector_textlinedetector_astarpath", (DL_FUNC) &_image_textlinedetector_textlinedetector_astarpath, 5},
     {"_image_textlinedetector_textlinedetector_crop", (DL_FUNC) &_image_textlinedetector_textlinedetector_crop, 1},
     {"_image_textlinedetector_textlinedetector_resize", (DL_FUNC) &_image_textlinedetector_textlinedetector_resize, 2},
     {"_image_textlinedetector_textlinedetector_binarization", (DL_FUNC) &_image_textlinedetector_textlinedetector_binarization, 3},

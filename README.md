@@ -6,9 +6,10 @@ Objective of the package is to more easily plug the text lines in Handwritten Te
 
 The algorithm in this R package follows the following techniques:
 
-- All techniques are explained [in this document](https://github.com/arthurflor23/text-segmentation/blob/master/doc/Text%20Segmentation.pdf)
-- The technique for line segmentation is explained in more detail [in this paper](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.88.5806&rep=rep1&type=pdf)
+1. __An Implementation of a Novel A* Path Planning Algorithm for Line Segmentation of Handwritten Documents__ [paper link](https://github.com/smeucci/LineSegm/blob/master/c%2B%2B/linesegm/docs/relazione.pdf)
+2. __A Statistical approach to line segmentation in handwritten documents__ [paper link](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.88.5806&rep=rep1&type=pdf)
 
+More descriptions of technique 2 can be found [in this document](https://github.com/arthurflor23/text-segmentation/blob/master/doc/Text%20Segmentation.pdf)
 
 ### Installation
 
@@ -28,7 +29,38 @@ help(package = "image.textlinedetector")
 
 ## Example
 
+### Based on the paper `An Implementation of a Novel A* Path Planning Algorithm for Line Segmentation of Handwritten Documents`
+
+![](https://raw.githubusercontent.com/DIGI-VUB/image.textlinedetector/master/inst/extdata/example-result-astar.png)
+
+```
+library(opencv)
+library(magick)
+library(image.binarization)
+library(image.textlinedetector)
+#path <- "C:/Users/Jan/Desktop/OCR-HTR/RABrugge_TBO119_693_088.jpg"
+#path <- "C:/Users/Jan/Desktop/OCR-HTR/RABrugge_TBO119_693_088-su.jpg"
+path <- system.file(package = "image.textlinedetector", "extdata", "example.png")
+path <- system.file("extdata", "doxa-example.png", package = "image.binarization")
+x <- image_read(path)
+x <- image_binarization(x, type = "su")
+
+width  <- image_info(x)$width
+height <- image_info(x)$height
+x   <- image_data(x, channels = "gray")
+img <- image.textlinedetector:::cvmat_bw(x, width = width, height = height)
+img <- image.textlinedetector:::textlinedetector_astarpath(img, morph = FALSE, step = 2, mfactor = 5)
+img$n
+img$overview
+img$lines
+img$textlines[[2]]
+img$textlines[[4]]
+```
+
+### Based on the paper `A Statistical approach to line segmentation in handwritten documents`
+
 ![](https://raw.githubusercontent.com/DIGI-VUB/image.textlinedetector/master/inst/extdata/example-result.png)
+
 
 ```{r}
 library(opencv)

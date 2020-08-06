@@ -74,6 +74,16 @@ set_num_threads <- function(n = 0L) {
 }
 
 #' @export
+cvmat_chop <- function(ptr, x, y, width = 0L, height = 0L) {
+    .Call('_image_textlinedetector_cvmat_chop', PACKAGE = 'image.textlinedetector', ptr, x, y, width, height)
+}
+
+#' @export
+textlinedetector_astarpath <- function(ptr, morph = TRUE, step = 2L, mfactor = 5L, trace = TRUE) {
+    .Call('_image_textlinedetector_textlinedetector_astarpath', PACKAGE = 'image.textlinedetector', ptr, morph, step, mfactor, trace)
+}
+
+#' @export
 textlinedetector_crop <- function(ptr) {
     .Call('_image_textlinedetector_textlinedetector_crop', PACKAGE = 'image.textlinedetector', ptr)
 }
