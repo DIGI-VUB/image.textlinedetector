@@ -12,10 +12,11 @@ The algorithm in this R package follows the following techniques:
 
 ### Installation
 
-- For installing the development version of this package: 
+- For installing the development version of this package and to execute the example 
 
 ```
 install.packages("opencv")
+install.packages("magick")
 remotes::install_github("DIGI-VUB/image.textlinedetector")
 ```
 
