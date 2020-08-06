@@ -123,21 +123,21 @@ void Scanner::process(Mat image, Mat &output){
 	vector<vector<Point>> hull(contours.size());
 	int sum_area = 0, mean_area = 0;
 
-	for(int i=0; i<contours.size(); i++){
+	for(unsigned int i=0; i<contours.size(); i++){
 		convexHull(Mat(contours[i]), hull[i], false);
 		sum_area += contourArea(Mat(hull[i]));
 	}
 	mean_area = sum_area / hull.size();
 
-	for(int i=0; i<hull.size(); i++){
+	for(unsigned int i=0; i<hull.size(); i++){
 		if(contourArea(Mat(hull[i])) >= mean_area){
 			shapes.push_back(hull[i]);
 		}
 	}
 	sort(shapes.begin(), shapes.end(), compareContourAreas);	
 
-	for(int i=1; i<shapes.size(); i++){
-		for(int j=0; j<shapes[i].size(); j++)
+	for(unsigned int i=1; i<shapes.size(); i++){
+		for(unsigned int j=0; j<shapes[i].size(); j++)
 			shapes[0].push_back(shapes[i][j]);
 	}
 
@@ -148,14 +148,14 @@ void Scanner::process(Mat image, Mat &output){
 	vector<vector<Point>> approx;
 	approx.resize(contours.size());
 
-	for(int i=0; i<contours.size(); i++){
+	for(unsigned int i=0; i<contours.size(); i++){
 		double peri = 0.01 * arcLength(contours[i], true);
 		approxPolyDP(contours[i], approx[i], peri, true);
 	}
 
-	for(int i=0; i<approx.size(); i++){
+	for(unsigned int i=0; i<approx.size(); i++){
 		if(approx[i].size() == 4){
-			for(int j=0; j<approx[i].size(); j++)
+			for(unsigned int j=0; j<approx[i].size(); j++)
 				approx[i][j] *= ratio;
 
 			fourPointTransform(orig, output, approx[i]);

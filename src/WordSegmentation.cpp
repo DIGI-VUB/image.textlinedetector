@@ -18,13 +18,13 @@ void WordSegmentation::processBounds(Mat &image, vector<Rect> &boundRect){
     vector<vector<Point>> contours;
    	vector<Vec4i> hierarchy;
     Mat edged;
-    int lastNumber = 0;
+    unsigned int lastNumber = 0;
 
     while(true){
         findContours(image, contours, hierarchy, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
         edged = Mat::zeros(Size(image.cols, image.rows), CV_8UC1);
 
-        for (int i=0; i<contours.size(); i++){
+        for (unsigned int i=0; i<contours.size(); i++){
             Rect r = boundingRect(Mat(contours[i]));
             rectangle(edged, r.tl(), r.br(), 255, 2, 8, 0);
         }
@@ -36,11 +36,11 @@ void WordSegmentation::processBounds(Mat &image, vector<Rect> &boundRect){
         lastNumber = contours.size();
     }
 
-    for (int i=0; i<contours.size(); i++)
+    for (unsigned int i=0; i<contours.size(); i++)
         boundRect.push_back(boundingRect(Mat(contours[i])));
     sort(boundRect.begin(), boundRect.end(), compareXCords);
 
-    int i=0;
+    unsigned int i=0;
     while (i<boundRect.size()-1){
         if (boundRect[i].tl().x <= boundRect[i+1].tl().x && 
             boundRect[i].br().x >= boundRect[i+1].br().x
@@ -73,7 +73,7 @@ void WordSegmentation::segment(Mat line, vector<Mat> &words){
     Mat imageColor;
     cvtColor(line, imageColor, COLOR_GRAY2BGR);
 
-    for (int i=0; i<boundRect.size(); i++){
+    for (unsigned int i=0; i<boundRect.size(); i++){
         Mat cropped;
         line(boundRect[i]).copyTo(cropped);
 

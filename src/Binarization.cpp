@@ -267,7 +267,7 @@ void Binarization::getHistogram(Mat image){
     float bins[] = {0,300};
     const float *ranges[] = {bins};
 
-    for (int i=0; i<bgrPlanes.size(); i++)
+    for (unsigned int i=0; i<bgrPlanes.size(); i++)
         calcHist(&bgrPlanes[i], 1, 0, Mat(), this->histogram, 1, histSize, ranges, true, true);
 
     getHR(sqrt(image.rows * image.cols));

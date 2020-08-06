@@ -23,7 +23,7 @@ void LineSegmentation::segment(Mat &input, vector<Mat> &output, int chunksNumber
         output.push_back(input);
     }
 
-    for(int i=0; i<output.size(); i++)
+    for(unsigned int i=0; i<output.size(); i++)
         deslant(output[i], output[i], 255);
 }
 
@@ -40,7 +40,7 @@ void LineSegmentation::sieve() {
 }
 
 void LineSegmentation::addPrimesToVector(int n, vector<int> &probPrimes) {
-    for (int i=0; i<primes.size(); ++i) {
+    for (unsigned int i=0; i<primes.size(); ++i) {
         while (n % primes[i]) {
             n /= primes[i];
             probPrimes[i]++;
@@ -84,10 +84,10 @@ void LineSegmentation::getContours() {
     bool isRepeated;
     cvtColor(this->binaryImg, this->contoursDrawing, COLOR_GRAY2BGR);
 
-    for (int i=0; i<boundRect.size(); i++) {
+    for (unsigned int i=0; i<boundRect.size(); i++) {
         isRepeated = false;
 
-        for (int j=i+1; j<boundRect.size(); j++) {
+        for (unsigned int j=i+1; j<boundRect.size(); j++) {
             rectangle3 = boundRect[i] & boundRect[j];
 
             if ((rectangle3.area() == boundRect[i].area()) || (rectangle3.area() == boundRect[j].area())) {
@@ -162,7 +162,7 @@ Line * LineSegmentation::connectValleys(int i, Valley *currentValley, Line *line
     int connectedTo = -1;
     int minDistance = 100000;
 
-    for (int j=0; j<this->chunks[i]->valleys.size(); j++) {
+    for (unsigned int j=0; j<this->chunks[i]->valleys.size(); j++) {
         Valley *valley = this->chunks[i]->valleys[j];
         if (valley->used) continue;
 
@@ -197,7 +197,7 @@ void LineSegmentation::generateRegions() {
     if (r->height < this->predictedLineHeight * 2.5)
         this->avgLineHeight += r->height;
 
-    for (int i=0; i<this->initialLines.size(); ++i) {
+    for (unsigned int i=0; i<this->initialLines.size(); ++i) {
         Line *topLine = this->initialLines[i];
         Line *bottomLine = (i == this->initialLines.size()-1) ? nullptr : this->initialLines[i + 1];
 
@@ -226,7 +226,7 @@ void LineSegmentation::repairLines() {
     for (Line *line : initialLines) {
         map<int, bool> columnProcessed = map<int, bool>();
 
-        for (int i=0; i<line->points.size(); i++) {
+        for (unsigned int i=0; i<line->points.size(); i++) {
             Point &point = line->points[i];
             int x = (line->points[i]).x, y = (line->points[i]).y;
 
@@ -301,7 +301,7 @@ bool LineSegmentation::componentBelongsToAboveRegion(Line &line, Rect &contour) 
 
     int probAbove = 0, probBelow = 0;
 
-    for (int k = 0; k < probAbovePrimes.size(); ++k) {
+    for (unsigned int k = 0; k < probAbovePrimes.size(); ++k) {
         int mini = min(probAbovePrimes[k], probBelowPrimes[k]);
 
         probAbovePrimes[k] -= mini;
@@ -413,7 +413,7 @@ void Chunk::calculateHistogram() {
     }
 
     sort(whiteSpaces.begin(), whiteSpaces.end());
-    for (int i=0; i<whiteSpaces.size(); ++i) {
+    for (unsigned int i=0; i<whiteSpaces.size(); ++i) {
         if (whiteSpaces[i] > 4 * avgHeight) break;
         avgWhiteHeight += whiteSpaces[i];
         whiteLinesCount++;
@@ -427,7 +427,7 @@ void Chunk::calculateHistogram() {
 int Chunk::findPeaksValleys(map<int, Valley *> &mapValley) {
     this->calculateHistogram();
 
-    for (int i=1; i+1<this->histogram.size(); i++) {
+    for (unsigned int i=1; i+1<this->histogram.size(); i++) {
         int leftVal = this->histogram[i-1], centreVal = this->histogram[i], rightVal = this->histogram[i+1];
 
         if (centreVal >= leftVal && centreVal >= rightVal) {
@@ -462,7 +462,7 @@ int Chunk::findPeaksValleys(map<int, Valley *> &mapValley) {
     peaks.resize(linesCount + 1 <= peaks.size() ? (unsigned long) linesCount + 1 : peaks.size());
     sort(peaks.begin(), peaks.end(), Peak::comp);
 
-    for (int i=1; i<peaks.size(); i++) {
+    for (unsigned int i=1; i<peaks.size(); i++) {
         int minPosition = (peaks[i - 1].position + peaks[i].position) / 2;
         int minValue = this->histogram[minPosition];
 
