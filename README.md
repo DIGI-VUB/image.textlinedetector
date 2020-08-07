@@ -69,7 +69,7 @@ img   <- image_read(path)
 areas <- image_textlines_flor(img, crop = TRUE, light = TRUE, type = "sauvola")
 areas$overview
 areas$textlines[[6]]
-textwords <- image_wordsegmentation(textlines$textlines[[6]])
+textwords <- image_wordsegmentation(areas$textlines[[6]])
 textwords$n
 textwords$overview
 textwords$words[[2]]
