@@ -44,7 +44,7 @@ path <- system.file(package = "image.textlinedetector", "extdata", "example.png"
 path <- system.file("extdata", "doxa-example.png", package = "image.binarization")
 img   <- image_read(path)
 img   <- image_binarization(img, type = "su")
-areas <- image_textlines_astar(x, morph = TRUE, step = 2, mfactor = 5)
+areas <- image_textlines_astar(img, morph = TRUE, step = 2, mfactor = 5)
 areas$n
 areas$overview
 areas$lines
