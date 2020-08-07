@@ -18,6 +18,7 @@ More descriptions of technique 2 can be found [in this document](https://github.
 ```
 install.packages("opencv")
 install.packages("magick")
+install.packages("image.binarization")
 remotes::install_github("DIGI-VUB/image.textlinedetector")
 ```
 
