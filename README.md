@@ -42,19 +42,17 @@ library(image.textlinedetector)
 #path <- "C:/Users/Jan/Desktop/OCR-HTR/RABrugge_TBO119_693_088-su.jpg"
 path <- system.file(package = "image.textlinedetector", "extdata", "example.png")
 path <- system.file("extdata", "doxa-example.png", package = "image.binarization")
-x <- image_read(path)
-x <- image_binarization(x, type = "su")
-
-width  <- image_info(x)$width
-height <- image_info(x)$height
-x   <- image_data(x, channels = "gray")
-img <- image.textlinedetector:::cvmat_bw(x, width = width, height = height)
-img <- image.textlinedetector:::textlinedetector_astarpath(img, morph = FALSE, step = 2, mfactor = 5)
-img$n
-img$overview
-img$lines
-img$textlines[[2]]
-img$textlines[[4]]
+img   <- image_read(path)
+img   <- image_binarization(img, type = "su")
+areas <- image_textlines_astar(x, morph = TRUE, step = 2, mfactor = 5)
+areas$n
+areas$overview
+areas$lines
+areas$textlines[[2]]
+areas$textlines[[4]]
+combined <- lapply(areas$textlines, FUN = function(x) image_read(ocv_bitmap(x)))
+combined <- do.call(c, combined)
+combined
 ```
 
 ### Based on the paper `A Statistical approach to line segmentation in handwritten documents`
@@ -66,25 +64,19 @@ img$textlines[[4]]
 library(opencv)
 library(magick)
 library(image.textlinedetector)
-path <- system.file(package = "image.textlinedetector", "extdata", "example.png")
-x <- image_read(path)
-
-width  <- image_info(x)$width
-height <- image_info(x)$height
-x   <- image_data(x, channels = "bgr")
-img <- image.textlinedetector:::cvmat_bgr(x, width = width, height = height)
-img <- textlinedetector_crop(img)
-img <- textlinedetector_resize(img)
-img <- textlinedetector_binarization(img)
-textlines <- textlinedetector_linesegmentation(img)
-textlines$n
-textlines$overview
-textlines$textlines[[1]]
-textwords <- textlinedetector_wordsegmentation(textlines$textlines[[6]])
+path  <- system.file(package = "image.textlinedetector", "extdata", "example.png")
+img   <- image_read(path)
+areas <- image_textlines_flor(img, crop = TRUE, light = TRUE, type = "sauvola")
+areas$overview
+areas$textlines[[6]]
+textwords <- image_wordsegmentation(textlines$textlines[[6]])
 textwords$n
 textwords$overview
 textwords$words[[2]]
 textwords$words[[3]]
+combined <- lapply(textwords$words, FUN = function(x) image_read(ocv_bitmap(x)))
+combined <- do.call(c, combined)
+combined
 ```
 
 ### DIGI

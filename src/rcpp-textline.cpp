@@ -9,7 +9,6 @@
 #include "WordSegmentation.hpp"
 #include <string>
 
-//' @export
 // [[Rcpp::export]]
 XPtrMat textlinedetector_crop(XPtrMat ptr){
   cv::Mat image = get_mat(ptr);
@@ -20,7 +19,6 @@ XPtrMat textlinedetector_crop(XPtrMat ptr){
   return cvmat_xptr(imageCropped);
 }
 
-//' @export
 // [[Rcpp::export]]
 XPtrMat textlinedetector_resize(XPtrMat ptr, int width = 1280){
   int newW = width;
@@ -31,7 +29,6 @@ XPtrMat textlinedetector_resize(XPtrMat ptr, int width = 1280){
   return cvmat_xptr(imageCropped);
 }
 
-//' @export
 // [[Rcpp::export]]
 XPtrMat textlinedetector_binarization(XPtrMat ptr, bool light = true, int type = 3){
   cv::Mat imageCropped = get_mat(ptr);
@@ -43,7 +40,6 @@ XPtrMat textlinedetector_binarization(XPtrMat ptr, bool light = true, int type =
 }
 
 
-//' @export
 // [[Rcpp::export]]
 Rcpp::List textlinedetector_linesegmentation(XPtrMat ptr, int chunksNumber = 8, int chunksProcess = 4, int kernelSize = 11, int sigma = 11, int theta = 7){
   cv::Mat imageBinary = get_mat(ptr);
@@ -97,7 +93,6 @@ Rcpp::List textlinedetector_linesegmentation(XPtrMat ptr, int chunksNumber = 8, 
                             );
 }
 
-//' @export
 // [[Rcpp::export]]
 Rcpp::List textlinedetector_wordsegmentation(XPtrMat ptr, int kernelSize = 11, int sigma = 11, int theta = 7){
   cv::Mat textlineimg = get_mat(ptr);
@@ -109,7 +104,7 @@ Rcpp::List textlinedetector_wordsegmentation(XPtrMat ptr, int kernelSize = 11, i
   std::vector<cv::Mat> words;
   word->segment(textlineimg, words);
     
-  Rcpp::List tokens(words.size());
+  Rcpp::List tokens(words.size()-1);
   for (unsigned int i=1; i<words.size(); i++) {
     tokens[i-1] = cvmat_xptr(words[i]);
   }

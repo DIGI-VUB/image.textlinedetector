@@ -31,6 +31,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cvmat_rect
+XPtrMat cvmat_rect(XPtrMat ptr, int x, int y, int width, int height);
+RcppExport SEXP _image_textlinedetector_cvmat_rect(SEXP ptrSEXP, SEXP xSEXP, SEXP ySEXP, SEXP widthSEXP, SEXP heightSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrMat >::type ptr(ptrSEXP);
+    Rcpp::traits::input_parameter< int >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type y(ySEXP);
+    Rcpp::traits::input_parameter< int >::type width(widthSEXP);
+    Rcpp::traits::input_parameter< int >::type height(heightSEXP);
+    rcpp_result_gen = Rcpp::wrap(cvmat_rect(ptr, x, y, width, height));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cvmat_destroy
 void cvmat_destroy(XPtrMat image);
 RcppExport SEXP _image_textlinedetector_cvmat_destroy(SEXP imageSEXP) {
@@ -206,21 +221,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// cvmat_chop
-XPtrMat cvmat_chop(XPtrMat ptr, int x, int y, int width, int height);
-RcppExport SEXP _image_textlinedetector_cvmat_chop(SEXP ptrSEXP, SEXP xSEXP, SEXP ySEXP, SEXP widthSEXP, SEXP heightSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< XPtrMat >::type ptr(ptrSEXP);
-    Rcpp::traits::input_parameter< int >::type x(xSEXP);
-    Rcpp::traits::input_parameter< int >::type y(ySEXP);
-    Rcpp::traits::input_parameter< int >::type width(widthSEXP);
-    Rcpp::traits::input_parameter< int >::type height(heightSEXP);
-    rcpp_result_gen = Rcpp::wrap(cvmat_chop(ptr, x, y, width, height));
-    return rcpp_result_gen;
-END_RCPP
-}
 // textlinedetector_astarpath
 Rcpp::List textlinedetector_astarpath(XPtrMat ptr, bool morph, int step, int mfactor, bool trace);
 RcppExport SEXP _image_textlinedetector_textlinedetector_astarpath(SEXP ptrSEXP, SEXP morphSEXP, SEXP stepSEXP, SEXP mfactorSEXP, SEXP traceSEXP) {
@@ -306,6 +306,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_image_textlinedetector_cvmat_bgr", (DL_FUNC) &_image_textlinedetector_cvmat_bgr, 3},
     {"_image_textlinedetector_cvmat_bw", (DL_FUNC) &_image_textlinedetector_cvmat_bw, 3},
+    {"_image_textlinedetector_cvmat_rect", (DL_FUNC) &_image_textlinedetector_cvmat_rect, 5},
     {"_image_textlinedetector_cvmat_destroy", (DL_FUNC) &_image_textlinedetector_cvmat_destroy, 1},
     {"_image_textlinedetector_cvmat_dead", (DL_FUNC) &_image_textlinedetector_cvmat_dead, 1},
     {"_image_textlinedetector_cvmat_size", (DL_FUNC) &_image_textlinedetector_cvmat_size, 1},
@@ -322,7 +323,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_image_textlinedetector_livestream", (DL_FUNC) &_image_textlinedetector_livestream, 1},
     {"_image_textlinedetector_data_prefix", (DL_FUNC) &_image_textlinedetector_data_prefix, 0},
     {"_image_textlinedetector_set_num_threads", (DL_FUNC) &_image_textlinedetector_set_num_threads, 1},
-    {"_image_textlinedetector_cvmat_chop", (DL_FUNC) &_image_textlinedetector_cvmat_chop, 5},
     {"_image_textlinedetector_textlinedetector_astarpath", (DL_FUNC) &_image_textlinedetector_textlinedetector_astarpath, 5},
     {"_image_textlinedetector_textlinedetector_crop", (DL_FUNC) &_image_textlinedetector_textlinedetector_crop, 1},
     {"_image_textlinedetector_textlinedetector_resize", (DL_FUNC) &_image_textlinedetector_textlinedetector_resize, 2},

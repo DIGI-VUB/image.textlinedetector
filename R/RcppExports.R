@@ -9,6 +9,10 @@ cvmat_bw <- function(img, width = 0L, height = 0L) {
     .Call('_image_textlinedetector_cvmat_bw', PACKAGE = 'image.textlinedetector', img, width, height)
 }
 
+cvmat_rect <- function(ptr, x, y, width = 0L, height = 0L) {
+    .Call('_image_textlinedetector_cvmat_rect', PACKAGE = 'image.textlinedetector', ptr, x, y, width, height)
+}
+
 cvmat_destroy <- function(image) {
     invisible(.Call('_image_textlinedetector_cvmat_destroy', PACKAGE = 'image.textlinedetector', image))
 }
@@ -73,37 +77,26 @@ set_num_threads <- function(n = 0L) {
     .Call('_image_textlinedetector_set_num_threads', PACKAGE = 'image.textlinedetector', n)
 }
 
-#' @export
-cvmat_chop <- function(ptr, x, y, width = 0L, height = 0L) {
-    .Call('_image_textlinedetector_cvmat_chop', PACKAGE = 'image.textlinedetector', ptr, x, y, width, height)
-}
-
-#' @export
 textlinedetector_astarpath <- function(ptr, morph = TRUE, step = 2L, mfactor = 5L, trace = TRUE) {
     .Call('_image_textlinedetector_textlinedetector_astarpath', PACKAGE = 'image.textlinedetector', ptr, morph, step, mfactor, trace)
 }
 
-#' @export
 textlinedetector_crop <- function(ptr) {
     .Call('_image_textlinedetector_textlinedetector_crop', PACKAGE = 'image.textlinedetector', ptr)
 }
 
-#' @export
 textlinedetector_resize <- function(ptr, width = 1280L) {
     .Call('_image_textlinedetector_textlinedetector_resize', PACKAGE = 'image.textlinedetector', ptr, width)
 }
 
-#' @export
 textlinedetector_binarization <- function(ptr, light = TRUE, type = 3L) {
     .Call('_image_textlinedetector_textlinedetector_binarization', PACKAGE = 'image.textlinedetector', ptr, light, type)
 }
 
-#' @export
 textlinedetector_linesegmentation <- function(ptr, chunksNumber = 8L, chunksProcess = 4L, kernelSize = 11L, sigma = 11L, theta = 7L) {
     .Call('_image_textlinedetector_textlinedetector_linesegmentation', PACKAGE = 'image.textlinedetector', ptr, chunksNumber, chunksProcess, kernelSize, sigma, theta)
 }
 
-#' @export
 textlinedetector_wordsegmentation <- function(ptr, kernelSize = 11L, sigma = 11L, theta = 7L) {
     .Call('_image_textlinedetector_textlinedetector_wordsegmentation', PACKAGE = 'image.textlinedetector', ptr, kernelSize, sigma, theta)
 }

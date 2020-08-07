@@ -1,5 +1,8 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+.vscode
 dev
 inst/share
+inst/extdata/example-result.png
+inst/extdata/example-result-astar.png
 windows

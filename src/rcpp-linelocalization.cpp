@@ -344,18 +344,8 @@ inline void astar_search (const Graph& graph, typename Graph::Node start, typena
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//' @export
-// [[Rcpp::export]]
-XPtrMat cvmat_chop(XPtrMat ptr, int x, int y, int width = 0, int height = 0){
-  cv::Mat img = get_mat(ptr);
-  cv::Rect roi = Rect(x, y, width, height);
-  cv::Mat output = img(roi);
-  return cvmat_xptr(output);
-}
 
 
-
-//' @export
 // [[Rcpp::export]]
 Rcpp::List textlinedetector_astarpath(XPtrMat ptr, bool morph = true, int step = 2, int mfactor = 5, bool trace = true){
   cv::Mat img = get_mat(ptr);
