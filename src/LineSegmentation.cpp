@@ -2,7 +2,7 @@
 
 LineSegmentation::LineSegmentation() {
     sieve();
-};
+}
 
 void LineSegmentation::segment(Mat &input, vector<Mat> &output, int chunksNumber, int chunksProcess) {
     this->binaryImg = input.clone();

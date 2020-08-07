@@ -2,7 +2,7 @@
 
 Scanner::Scanner() {
 	this->cropped = false;
-};
+}
 
 bool compareContourAreas(vector<Point> contour1, vector<Point> contour2){
 	double i = fabs(contourArea(Mat(contour1)));

@@ -1,6 +1,6 @@
 #include "WordSegmentation.hpp"
 
-WordSegmentation::WordSegmentation() {};
+WordSegmentation::WordSegmentation() {}
 
 bool compareXCords(const Rect &p1, const Rect &p2){
 	return (p1.x < p2.x);

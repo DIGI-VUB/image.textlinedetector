@@ -5,7 +5,7 @@
 #define fget(x,y)at<float>(y,x)
 #define fset(x,y,v)at<float>(y,x)=v;
 
-Binarization::Binarization() {};
+Binarization::Binarization() {}
 
 void Binarization::binarize(Mat image, Mat &output, bool light, int option){
 	Mat grayscale;
