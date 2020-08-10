@@ -4,7 +4,7 @@
 \alias{image_textlines_astar}
 \title{Text Line Segmentation based on the A* Path Planning Algorithm}
 \usage{
-image_textlines_astar(x, morph = FALSE, step = 2, mfactor = 5)
+image_textlines_astar(x, morph = FALSE, step = 2, mfactor = 5, trace = TRUE)
 }
 \arguments{
 \item{x}{an object of class magick-image}
@@ -14,6 +14,8 @@ image_textlines_astar(x, morph = FALSE, step = 2, mfactor = 5)
 \item{step}{step size of A-star}
 
 \item{mfactor}{multiplication factor in the cost heuristic of the A-star algorithm}
+
+\item{trace}{logical indicating to show the evolution of the line detection}
 }
 \value{
 a list with elements

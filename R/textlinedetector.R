@@ -53,6 +53,7 @@ image_textlines_flor <- function(x, crop = TRUE, resize_width = 1280, light = TR
 #' @param morph logical indicating to apply a morphological 5x5 filter
 #' @param step step size of A-star
 #' @param mfactor multiplication factor in the cost heuristic of the A-star algorithm
+#' @param trace logical indicating to show the evolution of the line detection
 #' @export 
 #' @return a list with elements
 #' \itemize{
@@ -70,7 +71,7 @@ image_textlines_flor <- function(x, crop = TRUE, resize_width = 1280, light = TR
 #' path  <- system.file("extdata", "doxa-example.png", package = "image.binarization")
 #' img   <- image_read(path)
 #' img   <- image_binarization(img, type = "su")
-#' areas <- image_textlines_astar(img, morph = TRUE, step = 2, mfactor = 5)
+#' areas <- image_textlines_astar(img, morph = TRUE, step = 2, mfactor = 5, trace = TRUE)
 #' areas$n
 #' areas$overview
 #' areas$lines
@@ -79,13 +80,13 @@ image_textlines_flor <- function(x, crop = TRUE, resize_width = 1280, light = TR
 #' combined <- lapply(areas$textlines, FUN=function(x) image_read(ocv_bitmap(x)))
 #' combined <- do.call(c, combined)
 #' combined
-image_textlines_astar <- function(x, morph = FALSE, step = 2, mfactor = 5){
+image_textlines_astar <- function(x, morph = FALSE, step = 2, mfactor = 5, trace = FALSE){
   stopifnot(inherits(x, "magick-image"))
   width  <- image_info(x)$width
   height <- image_info(x)$height
   x   <- image_data(x, channels = "gray")
   img <- cvmat_bw(x, width = width, height = height)
-  out <- textlinedetector_astarpath(img, morph = morph, step = step, mfactor = mfactor)
+  out <- textlinedetector_astarpath(img, morph = morph, step = step, mfactor = mfactor, trace = trace)
   out
 }
 
