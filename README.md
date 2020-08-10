@@ -40,9 +40,7 @@ library(magick)
 library(image.binarization)
 library(image.textlinedetector)
 #path <- "C:/Users/Jan/Desktop/OCR-HTR/RABrugge_TBO119_693_088.jpg"
-#path <- "C:/Users/Jan/Desktop/OCR-HTR/RABrugge_TBO119_693_088-su.jpg"
-path <- system.file(package = "image.textlinedetector", "extdata", "example.png")
-path <- system.file("extdata", "doxa-example.png", package = "image.binarization")
+path  <- system.file(package = "image.textlinedetector", "extdata", "example.png")
 img   <- image_read(path)
 img   <- image_binarization(img, type = "su")
 areas <- image_textlines_astar(img, morph = TRUE, step = 2, mfactor = 5)
