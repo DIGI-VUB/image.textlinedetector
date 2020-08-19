@@ -119,16 +119,17 @@ inline vector<int> localize (Mat& input) {
 	enhance(input, im);
 	invert(im, im);
 	vector<int> peaks = projection_analysis(im);
-	sort(peaks.begin(), peaks.end());
-
+	sort(peaks.begin(), peaks.end());  
 	vector<int> lines;
+	if(peaks.size() < 1){
+	  return lines;
+	}
 	int dist, valley;
-	for (unsigned int i = 0; i < peaks.size() - 1; i++) {
+	for (unsigned int i = 0; i < (peaks.size() - 1); i++) {
 		dist = (peaks[i + 1] - peaks[i]) / 2;
 		valley = peaks[i] + dist;
 		lines.push_back(valley);
 	}
-
 	return lines;
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -356,7 +357,7 @@ Rcpp::List textlinedetector_astarpath(XPtrMat ptr, bool morph = true, int step =
   }
   if(trace) Rcpp::Rcout << "- Detecting lines location..";
   vector<int> lines = localize(imbw);
-  if(trace) Rcpp::Rcout << " ==> " << lines.size() + 1 << " lines found." << endl;
+  if(trace) Rcpp::Rcout << " ==> " << lines.size() + 1 << " areas found." << endl;
   if(trace) Rcpp::Rcout << "- A* path planning algorithm.." << endl;
   Map map;
   map.grid = imbw / 255;
@@ -367,6 +368,9 @@ Rcpp::List textlinedetector_astarpath(XPtrMat ptr, bool morph = true, int step =
   Rcpp::List segmented_boxes(lines.size() + 1);
   int previous_y = 0;
   int i = 1;
+  if(lines.size() == 0){
+    i = 0;
+  }
   std::vector<int> from_x;
   std::vector<int> to_x;
   std::vector<int> from_y;
