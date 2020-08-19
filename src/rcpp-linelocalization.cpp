@@ -407,14 +407,26 @@ Rcpp::List textlinedetector_astarpath(XPtrMat ptr, bool morph = true, int step =
   cv::Mat cropped = img(cv::Rect(0, previous_y, img.cols, img.rows - previous_y));
   segmented_boxes[i] = cvmat_xptr(cropped);
 
-  // Rcpp::List segmented_images(paths.size());
-  // for (unsigned int i=0; i<paths.size(); i++) {
-  //   auto path = paths[i];
-  //   segmented_images[i] = cvmat_xptr(segment_line(img, path));
-  // }
+  Rcpp::List pathlines(paths.size());
+  for (unsigned int i=0; i<paths.size(); i++) {
+    auto path = paths[i];
+    std::vector<int> x;
+    std::vector<int> y;
+    for (auto node : path) {
+      int row, col;
+      tie (row, col) = node;
+      x.push_back(col);
+      y.push_back(row);
+    }
+    pathlines[i] = Rcpp::DataFrame::create(Rcpp::Named("x") = x,
+                                           Rcpp::Named("y") = y);
+    //segmented_images[i] = cvmat_xptr(segment_line(img, path));
+  }
+  
 
   return Rcpp::List::create(Rcpp::Named("n") = paths.size(),
-                            Rcpp::Named("overview") = cvmat_xptr(image_path*255),  
+                            Rcpp::Named("overview") = cvmat_xptr(image_path*255), 
+                            Rcpp::Named("paths") = pathlines,
                             Rcpp::Named("lines") = Rcpp::DataFrame::create(Rcpp::Named("x_from") = from_x, Rcpp::Named("x_to") = to_x,
                                                                            Rcpp::Named("y_from") = from_y, Rcpp::Named("y_to") = to_y),
                             Rcpp::Named("textlines") = segmented_boxes);

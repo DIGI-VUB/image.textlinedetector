@@ -59,7 +59,8 @@ image_textlines_flor <- function(x, crop = TRUE, resize_width = 1280, light = TR
 #' \itemize{
 #' \item{n: the number of lines found}
 #' \item{overview: an opencv-image of the detected areas}
-#' \item{textlines: a list of opencv-image's, one for each text line area}
+#' \item{paths: a list of data.frame's with the x/y location of the baseline paths}
+#' \item{textlines: a list of opencv-image's, one for each rectangular text line area}
 #' \item{lines: a data.frame with the x/y positions of the detected lines}
 #' }
 #' @examples 
@@ -67,11 +68,11 @@ image_textlines_flor <- function(x, crop = TRUE, resize_width = 1280, light = TR
 #' library(magick)
 #' library(image.binarization)
 #' library(image.textlinedetector)
-#' path  <- system.file(package = "image.textlinedetector", "extdata", "example.png")
-#' path  <- system.file("extdata", "doxa-example.png", package = "image.binarization")
-#' img   <- image_read(path)
-#' img   <- image_binarization(img, type = "su")
-#' areas <- image_textlines_astar(img, morph = TRUE, step = 2, mfactor = 5, trace = TRUE)
+#' path   <- system.file(package = "image.textlinedetector", "extdata", "example.png")
+#' path   <- system.file("extdata", "doxa-example.png", package = "image.binarization")
+#' img    <- image_read(path)
+#' img_bw <- image_binarization(img, type = "su")
+#' areas  <- image_textlines_astar(img_bw, morph = TRUE, step = 2, mfactor = 5, trace = TRUE)
 #' areas$n
 #' areas$overview
 #' areas$lines
@@ -80,6 +81,13 @@ image_textlines_flor <- function(x, crop = TRUE, resize_width = 1280, light = TR
 #' combined <- lapply(areas$textlines, FUN=function(x) image_read(ocv_bitmap(x)))
 #' combined <- do.call(c, combined)
 #' combined
+#' 
+#' plt <- image_draw(img)
+#' lapply(areas$paths, FUN=function(line){
+#'   lines(x = line$x, y = line$y, col = "red")  
+#' })
+#' dev.off()
+#' plt
 image_textlines_astar <- function(x, morph = FALSE, step = 2, mfactor = 5, trace = FALSE){
   stopifnot(inherits(x, "magick-image"))
   width  <- image_info(x)$width
