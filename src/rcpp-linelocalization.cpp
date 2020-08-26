@@ -16,7 +16,7 @@ inline Mat distance_transform (Mat input) {
 	for (int i = 0; i < input.cols; i++) {
 		Mat column = input(Rect(i, 0, 1, input.rows));
 		Mat dcol;
-#if CV_VERSION_EPOCH < 3
+#if (defined(CV_VERSION_EPOCH) && CV_VERSION_EPOCH == 2)
 		distanceTransform(column, dcol, CV_DIST_L2, 5);
 #else
 		distanceTransform(column, dcol, DIST_L2, 5);
