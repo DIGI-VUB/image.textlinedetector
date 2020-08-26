@@ -79,7 +79,7 @@ void LineSegmentation::getContours() {
         boundRect[i] = boundingRect(Mat(contoursPoly[i]));
     }
 
-    Rect2d rectangle3;
+    Rect_<double> rectangle3;
     vector<Rect> mergedRectangles;
     bool isRepeated;
     cvtColor(this->binaryImg, this->contoursDrawing, COLOR_GRAY2BGR);
@@ -93,7 +93,7 @@ void LineSegmentation::getContours() {
             if ((rectangle3.area() == boundRect[i].area()) || (rectangle3.area() == boundRect[j].area())) {
                 isRepeated = true;
                 rectangle3 = boundRect[i] | boundRect[j];
-                Rect2d mergedRectangle(rectangle3.tl().x, rectangle3.tl().y, rectangle3.width, rectangle3.height);
+                Rect_<double> mergedRectangle(rectangle3.tl().x, rectangle3.tl().y, rectangle3.width, rectangle3.height);
 
                 if (j == boundRect.size() - 2)
                     mergedRectangles.push_back(mergedRectangle);
@@ -104,12 +104,11 @@ void LineSegmentation::getContours() {
         if (!isRepeated)
             mergedRectangles.push_back(boundRect[i]);
     }
-
     for (size_t i=0; i<mergedRectangles.size(); i++)
-        rectangle(this->contoursDrawing, mergedRectangles[i].tl(), mergedRectangles[i].br(), Vec3b(0,0,255), 2, 8, 0);
-
+        rectangle(this->contoursDrawing, mergedRectangles[i].tl(), mergedRectangles[i].br(), cv::Scalar(0,0,255), 2, 8, 0);
     this->contours = mergedRectangles;
 }
+
 
 void LineSegmentation::generateChunks() {
     int width = binaryImg.cols;

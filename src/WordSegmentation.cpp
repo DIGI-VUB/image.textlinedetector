@@ -77,8 +77,8 @@ void WordSegmentation::segment(Mat line, vector<Mat> &words){
         Mat cropped;
         line(boundRect[i]).copyTo(cropped);
 
-        rectangle(imageColor, boundRect[i].tl(), boundRect[i].br(), Vec3b(0,0,255), 2, 8, 0);
-        putText(imageColor, to_string(i+1), boundRect[i].tl(), FONT_HERSHEY_SIMPLEX, 0.5, Vec3b(255,0,0), 2);
+        rectangle(imageColor, boundRect[i].tl(), boundRect[i].br(), cv::Scalar(0,0,255), 2, 8, 0);
+        putText(imageColor, to_string(i+1), boundRect[i].tl(), FONT_HERSHEY_SIMPLEX, 0.5, cv::Scalar(255,0,0), 2);
         words.push_back(cropped);
     }
 

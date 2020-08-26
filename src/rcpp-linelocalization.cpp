@@ -4,6 +4,7 @@
 #include "util.hpp"
 // For line localization
 #include <opencv2/opencv.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
 
 using namespace std;
 using namespace cv;
@@ -15,7 +16,11 @@ inline Mat distance_transform (Mat input) {
 	for (int i = 0; i < input.cols; i++) {
 		Mat column = input(Rect(i, 0, 1, input.rows));
 		Mat dcol;
+#if CV_VERSION_EPOCH < 3
+		distanceTransform(column, dcol, CV_DIST_L2, 5);
+#else
 		distanceTransform(column, dcol, DIST_L2, 5);
+#endif		
 		dcol.copyTo(dmat.col(i));
 	}
 
@@ -54,7 +59,7 @@ inline void draw_path (Mat& graph, vector<Node>& path) {
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#include "opencv2/opencv.hpp"
+#include <opencv2/opencv.hpp>
 #include "persistence1d.hpp"
 #include <algorithm>
 
