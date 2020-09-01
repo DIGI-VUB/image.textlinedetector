@@ -12,27 +12,35 @@ matrix:
           update: true
           sources:
             - sourceline: 'ppa:cran/opencv'
+            - sourceline: 'ppa:cran/imagemagick'
           packages:
             - libopencv-dev
             - opencv-data
+            - libmagick++-dev
     - dist: xenial # 3.2 branch (Bionic / Buster)
       addons:
         apt:
           update: true
           sources:
             - sourceline: 'ppa:cran/opencv-3.2'
+            - sourceline: 'ppa:cran/imagemagick'
           packages:
             - libopencv-dev
             - libopencv-shape-dev
             - opencv-data
+            - libmagick++-dev
     - os: osx
-      brew_packages: opencv@3
+      brew_packages: 
+        - opencv@3
+        - imagemagick@6
       env: PKG_CONFIG_PATH="/usr/local/opt/opencv@3/lib/pkgconfig"
     - os: osx
-      brew_packages: opencv@2
+      brew_packages: 
+        - opencv@2
+        - imagemagick@6
       env: PKG_CONFIG_PATH="/usr/local/opt/opencv@2/lib/pkgconfig"
     - os: osx
-      brew_packages: opencv
+      brew_packages: opencv imagemagick@6
     - os: osx
       osx_image: xcode11.4
       disable_homebrew: true
