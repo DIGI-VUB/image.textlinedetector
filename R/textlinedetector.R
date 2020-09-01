@@ -101,9 +101,6 @@ image_textlines_crop <- function(x){
 #' textwords$overview
 #' textwords$words[[2]]
 #' textwords$words[[3]]
-#' combined <- lapply(textwords$words, FUN=function(x) image_read(ocv_bitmap(x)))
-#' combined <- do.call(c, combined)
-#' combined
 image_wordsegmentation <- function(x, kernelSize = 11L, sigma = 11L, theta = 7L){
   out <- textlinedetector_wordsegmentation(x, kernelSize = kernelSize, sigma = sigma, theta = theta)
   out

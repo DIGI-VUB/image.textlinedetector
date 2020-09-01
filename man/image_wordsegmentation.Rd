@@ -42,7 +42,4 @@ textwords$n
 textwords$overview
 textwords$words[[2]]
 textwords$words[[3]]
-combined <- lapply(textwords$words, FUN=function(x) image_read(ocv_bitmap(x)))
-combined <- do.call(c, combined)
-combined
 }
