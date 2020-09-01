@@ -1,8 +1,6 @@
 #' @title Text Line Segmentation based on valley finding in projection profiles
 #' @description Text Line Segmentation based on valley finding in projection profiles
 #' @param x an object of class magick-image
-#' @param crop logical indicating to crop white space on the borders of the image
-#' @param resize_width resize after cropping to this specified width
 #' @param light logical indicating to remove light effects due to scanning
 #' @param type which type of binarisation to perform before doing line segmentation
 #' @export 
@@ -18,13 +16,14 @@
 #' library(image.textlinedetector)
 #' path  <- system.file(package = "image.textlinedetector", "extdata", "example.png")
 #' img   <- image_read(path)
-#' areas <- image_textlines_flor(img, crop = TRUE, light = TRUE, type = "sauvola")
+#' img   <- image_textlines_crop(img)
+#' areas <- image_textlines_flor(img, light = TRUE, type = "sauvola")
 #' areas$n
 #' areas$overview
 #' combined <- lapply(areas$textlines, FUN=function(x) image_read(ocv_bitmap(x)))
 #' combined <- do.call(c, combined)
 #' combined
-image_textlines_flor <- function(x, crop = TRUE, resize_width = 1280, light = TRUE, type = c("none", "niblack", "sauvola", "wolf")){
+image_textlines_flor <- function(x, light = TRUE, type = c("none", "niblack", "sauvola", "wolf")){
   stopifnot(inherits(x, "magick-image"))
   type <- match.arg(type)
   type <- switch(type, none = 1L, niblack = 2L, sauvola = 3L, wolf = 4L)
@@ -33,16 +32,78 @@ image_textlines_flor <- function(x, crop = TRUE, resize_width = 1280, light = TR
   height <- image_info(x)$height
   x   <- image_data(x, channels = "bgr")
   img <- cvmat_bgr(x, width = width, height = height)
-  if(crop){
-    img <- textlinedetector_crop(img)
-  }
-  if(!missing(resize_width)){
-    img <- textlinedetector_resize(img, width = resize_width)
-  }
   if(!missing(type)){
     img <- textlinedetector_binarization(img, light = light, type = type)
   }
   out <- textlinedetector_linesegmentation(img)
+  class(out) <- c("textlines", "flor")
+  out
+}
+
+
+#' @title Crop an image to extract only the region containing text
+#' @description Applies a sequence of image operations to obtain a region which contains relevant texts
+#' by cropping white space on the borders of the image.
+#' This is done in the following steps:
+#' morphological opening, morphological closing, blurring, canny edge detection, convex hull contours of the edges, 
+#' keep only contours above the mean contour area, find approximated contour lines of the convex hull contours of these, 
+#' dilation and thresholding.
+#' @param x an object of class magick-image
+#' @return an object of class magick-image
+#' @export 
+#' @examples 
+#' library(opencv)
+#' library(magick)
+#' library(image.textlinedetector)
+#' path  <- system.file(package = "image.textlinedetector", "extdata", "example.png")
+#' img   <- image_read(path)
+#' image_info(img)
+#' img   <- image_textlines_crop(img)
+#' image_info(img)
+image_textlines_crop <- function(x){
+  stopifnot(inherits(x, "magick-image"))
+  width  <- image_info(x)$width
+  height <- image_info(x)$height
+  x   <- image_data(x, channels = "bgr")
+  img <- cvmat_bgr(x, width = width, height = height)
+  img <- textlinedetector_crop(img)
+  image_read(cvmat_bitmap(img))
+}
+
+
+#' @title Find Words by Connected Components Labelling
+#' @description Filter the image using the gaussian kernel 
+#' and extract components which are connected which are to be considered as words.
+#' @param x an object of class opencv-image containing black/white binary data (type CV_8U1)
+#' @param kernelSize size of the kernel
+#' @param sigma sigma of the kernel
+#' @param theta theta of the kernel
+#' @export 
+#' @return a list with elements
+#' \itemize{
+#' \item{n: the number of lines found}
+#' \item{overview: an opencv-image of the detected areas}
+#' \item{words: a list of opencv-image's, one for each word area}
+#' }
+#' @examples 
+#' library(opencv)
+#' library(magick)
+#' library(image.textlinedetector)
+#' path  <- system.file(package = "image.textlinedetector", "extdata", "example.png")
+#' img   <- image_read(path)
+#' areas <- image_textlines_flor(img, light = TRUE, type = "sauvola")
+#' areas$overview
+#' areas$textlines[[6]]
+#' textwords <- image_wordsegmentation(areas$textlines[[6]])
+#' textwords$n
+#' textwords$overview
+#' textwords$words[[2]]
+#' textwords$words[[3]]
+#' combined <- lapply(textwords$words, FUN=function(x) image_read(ocv_bitmap(x)))
+#' combined <- do.call(c, combined)
+#' combined
+image_wordsegmentation <- function(x, kernelSize = 11L, sigma = 11L, theta = 7L){
+  out <- textlinedetector_wordsegmentation(x, kernelSize = kernelSize, sigma = sigma, theta = theta)
   out
 }
 
@@ -73,6 +134,7 @@ image_textlines_flor <- function(x, crop = TRUE, resize_width = 1280, light = TR
 #' img    <- image_read(path)
 #' img_bw <- image_binarization(img, type = "su")
 #' areas  <- image_textlines_astar(img_bw, morph = TRUE, step = 2, mfactor = 5, trace = TRUE)
+#' areas  <- lines(areas, img)
 #' areas$n
 #' areas$overview
 #' areas$lines
@@ -92,44 +154,63 @@ image_textlines_astar <- function(x, morph = FALSE, step = 2, mfactor = 5, trace
   stopifnot(inherits(x, "magick-image"))
   width  <- image_info(x)$width
   height <- image_info(x)$height
-  x   <- image_data(x, channels = "gray")
-  img <- cvmat_bw(x, width = width, height = height)
-  out <- textlinedetector_astarpath(img, morph = morph, step = step, mfactor = mfactor, trace = trace)
+  x <- image_data(x, channels = "gray")
+  x <- cvmat_bw(x, width = width, height = height)
+  out <- textlinedetector_astarpath(x, morph = morph, step = step, mfactor = mfactor, trace = trace)
+  class(out) <- c("textlines", "astarpath")
   out
 }
 
 
-#' @title Find Words by Connected Components Labelling
-#' @description Filter the image using the kernel and components which are connected are considered as words
-#' @param x an object of class opencv-image
-#' @param kernelSize size of the kernel
-#' @param sigma sigma of the kernel
-#' @param theta theta of the kernel
-#' @export 
-#' @return a list with elements
-#' \itemize{
-#' \item{n: the number of lines found}
-#' \item{overview: an opencv-image of the detected areas}
-#' \item{words: a list of opencv-image's, one for each word area}
-#' }
+#' @title Extract the polygons of the textlines
+#' @description Extract the polygons of the textlines as a cropped rectangular image containing the image content of the line segmented polygon
+#' @param x an object of class \code{textlines} as returned by \code{\link{image_textlines_astar}} or \code{\link{image_textlines_flor}} 
+#' @param image an object of class magick-image
+#' @param crop extract only the bounding box of the polygon of the text lines
+#' @param channels either 'bgr' or 'gray' to work on the colored data or on binary greyscale data
+#' @param ... further arguments passed on 
+#' @return the object \code{x} where element \code{textlines} is replaced with the extracted polygons of text lines
+#' @export
 #' @examples 
-#' library(opencv)
-#' library(magick)
-#' library(image.textlinedetector)
-#' path  <- system.file(package = "image.textlinedetector", "extdata", "example.png")
-#' img   <- image_read(path)
-#' areas <- image_textlines_flor(img, crop = TRUE, light = TRUE, type = "sauvola")
-#' areas$overview
-#' areas$textlines[[6]]
-#' textwords <- image_wordsegmentation(areas$textlines[[6]])
-#' textwords$n
-#' textwords$overview
-#' textwords$words[[2]]
-#' textwords$words[[3]]
-#' combined <- lapply(textwords$words, FUN=function(x) image_read(ocv_bitmap(x)))
-#' combined <- do.call(c, combined)
-#' combined
-image_wordsegmentation <- function(x, kernelSize = 11L, sigma = 11L, theta = 7L){
-  out <- textlinedetector_wordsegmentation(x, kernelSize = kernelSize, sigma = sigma, theta = theta)
-  out
+#' ## See the examples in ?image_textlines_astar or ?image_textlines_flor
+lines.textlines <- function(x, image, crop = TRUE, channels = c("bgr", "gray"), ...){
+  channels <- match.arg(channels)
+  stopifnot(inherits(image, "magick-image"))
+  width   <- image_info(image)$width
+  height  <- image_info(image)$height
+  if(channels == "bgr"){
+    img_bgr <- image_data(image, channels = "bgr")
+    img_bgr <- cvmat_bgr(img_bgr, width = width, height = height)  
+  }else if(channels == "gray"){
+    img_bgr <- image_data(image, channels = "gray")
+    img_bgr <- cvmat_bw(img_bgr, width = width, height = height)  
+  }
+  if(x$n > 0){
+    pts <- c(list(data.frame(ocv_points(img_bgr, type = c("topleft", "topright"))[c("x", "y")])), x$paths,
+             list(data.frame(ocv_points(img_bgr, type = c("bottomleft", "bottomright"))[c("x", "y")])))
+    for(i in seq_len(length(pts) - 1)){
+      a <- pts[[i]]
+      b <- pts[[i+1]]
+      a <- a[order(a$x, decreasing = FALSE), ]
+      b <- b[order(b$x, decreasing = TRUE), ]
+      combi <- rbind(a, b)
+      combi <- unique(combi)
+      x$textlines[[i]] <- cvmat_polygon(img_bgr, pts = combi, crop = crop, convex = FALSE, ...)
+    }
+  }
+  x
 }
+
+
+ocv_points <- function(image, type = c("topleft", "topright", "bottomleft", "bottomright")){
+  info <- cvmat_info(image)
+  pts <- list(type = c("topleft", "topright", "bottomleft", "bottomright"),
+              x = c(0L, info$width-1L, 0L, info$width-1),
+              y = c(0L, 0L, info$height-1, info$height-1L))
+  idx <- which(pts$type %in% type)
+  pts <- list(type = pts$type[idx], x = pts$x[idx], y = pts$y[idx])
+  pts
+}
+
+
+

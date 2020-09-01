@@ -7,7 +7,7 @@
 image_wordsegmentation(x, kernelSize = 11L, sigma = 11L, theta = 7L)
 }
 \arguments{
-\item{x}{an object of class opencv-image}
+\item{x}{an object of class opencv-image containing black/white binary data (type CV_8U1)}
 
 \item{kernelSize}{size of the kernel}
 
@@ -24,7 +24,8 @@ a list with elements
 }
 }
 \description{
-Filter the image using the kernel and components which are connected are considered as words
+Filter the image using the gaussian kernel 
+and extract components which are connected which are to be considered as words.
 }
 \examples{
 library(opencv)
@@ -32,7 +33,7 @@ library(magick)
 library(image.textlinedetector)
 path  <- system.file(package = "image.textlinedetector", "extdata", "example.png")
 img   <- image_read(path)
-areas <- image_textlines_flor(img, crop = TRUE, light = TRUE, type = "sauvola")
+areas <- image_textlines_flor(img, light = TRUE, type = "sauvola")
 areas$overview
 areas$textlines[[6]]
 textwords <- image_wordsegmentation(areas$textlines[[6]])

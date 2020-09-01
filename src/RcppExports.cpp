@@ -46,6 +46,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cvmat_polygon
+XPtrMat cvmat_polygon(XPtrMat ptr, Rcpp::List pts, bool convex, bool crop, int color);
+RcppExport SEXP _image_textlinedetector_cvmat_polygon(SEXP ptrSEXP, SEXP ptsSEXP, SEXP convexSEXP, SEXP cropSEXP, SEXP colorSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrMat >::type ptr(ptrSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type pts(ptsSEXP);
+    Rcpp::traits::input_parameter< bool >::type convex(convexSEXP);
+    Rcpp::traits::input_parameter< bool >::type crop(cropSEXP);
+    Rcpp::traits::input_parameter< int >::type color(colorSEXP);
+    rcpp_result_gen = Rcpp::wrap(cvmat_polygon(ptr, pts, convex, crop, color));
+    return rcpp_result_gen;
+END_RCPP
+}
 // cvmat_destroy
 void cvmat_destroy(XPtrMat image);
 RcppExport SEXP _image_textlinedetector_cvmat_destroy(SEXP imageSEXP) {
@@ -307,6 +322,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_image_textlinedetector_cvmat_bgr", (DL_FUNC) &_image_textlinedetector_cvmat_bgr, 3},
     {"_image_textlinedetector_cvmat_bw", (DL_FUNC) &_image_textlinedetector_cvmat_bw, 3},
     {"_image_textlinedetector_cvmat_rect", (DL_FUNC) &_image_textlinedetector_cvmat_rect, 5},
+    {"_image_textlinedetector_cvmat_polygon", (DL_FUNC) &_image_textlinedetector_cvmat_polygon, 5},
     {"_image_textlinedetector_cvmat_destroy", (DL_FUNC) &_image_textlinedetector_cvmat_destroy, 1},
     {"_image_textlinedetector_cvmat_dead", (DL_FUNC) &_image_textlinedetector_cvmat_dead, 1},
     {"_image_textlinedetector_cvmat_size", (DL_FUNC) &_image_textlinedetector_cvmat_size, 1},

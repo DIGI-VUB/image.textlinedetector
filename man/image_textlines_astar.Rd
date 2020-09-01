@@ -40,6 +40,7 @@ path   <- system.file("extdata", "doxa-example.png", package = "image.binarizati
 img    <- image_read(path)
 img_bw <- image_binarization(img, type = "su")
 areas  <- image_textlines_astar(img_bw, morph = TRUE, step = 2, mfactor = 5, trace = TRUE)
+areas  <- lines(areas, img)
 areas$n
 areas$overview
 areas$lines

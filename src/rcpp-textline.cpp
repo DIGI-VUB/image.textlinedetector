@@ -53,44 +53,27 @@ Rcpp::List textlinedetector_linesegmentation(XPtrMat ptr, int chunksNumber = 8, 
   for (unsigned int i=0; i<lines.size(); i++) {
     textlines[i] = cvmat_xptr(lines[i]);
   }
-  /*
+
   // Get region x/y locations
   unsigned int regions_nr = line->lineRegions.size();
-  Rcpp::List coords(regions_nr);
-  for (unsigned int i=0; i<regions_nr; i++) {
+  Rcpp::List coords(regions_nr-1);
+  for (unsigned int i=1; i<regions_nr; i++) {
     std::vector<int> top_x;
     std::vector<int> top_y;
-    std::vector<int> bottom_x;
-    std::vector<int> bottom_y;    
-
-    auto region = line->lineRegions[i];
-    Line top    = *region->top;
-    Line bottom = *region->bottom;
-    
-    for (auto point : region->top->points) {
-      top_x.push_back(point->x);
-      top_y.push_back(point->y);
+    Region * region = line->lineRegions[i];
+    Line *top    = (*region).top;
+    vector<Point> top_pts = (*top).points;
+    for (auto point : top_pts) {
+      top_x.push_back(point.x);
+      top_y.push_back(point.y);  
     }
-
-    for (auto point : region->bottom->points) {
-      bottom_x.push_back(point->x);
-      bottom_y.push_back(point->y);  
-    }
-    coords[i] = Rcpp::List::create(Rcpp::Named("regionID") = region->regionID,  
-    Rcpp::Named("test") = top.points.size(),
-                                   Rcpp::Named("height") = region->height//,  
-                                   //Rcpp::Named("top_x")    = top_x,
-                                   //Rcpp::Named("top_y")    = top_y,
-                                   //Rcpp::Named("bottom_x") = bottom_x,
-                                   //Rcpp::Named("bottom_y") = bottom_y
-                                   );
+    coords[i-1] = Rcpp::DataFrame::create(Rcpp::Named("x") = top_y,
+                                          Rcpp::Named("y") = top_x);
   }
-  */
   return Rcpp::List::create(Rcpp::Named("n") = lines.size(),
                             Rcpp::Named("overview") = cvmat_xptr(imageLines),
-                            Rcpp::Named("textlines") = textlines//,
-                            //Rcpp::Named("coords") = coords
-                            );
+                            Rcpp::Named("textlines") = textlines,
+                            Rcpp::Named("paths") = coords);
 }
 
 // [[Rcpp::export]]

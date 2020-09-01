@@ -6,18 +6,12 @@
 \usage{
 image_textlines_flor(
   x,
-  crop = TRUE,
-  resize_width = 1280,
   light = TRUE,
   type = c("none", "niblack", "sauvola", "wolf")
 )
 }
 \arguments{
 \item{x}{an object of class magick-image}
-
-\item{crop}{logical indicating to crop white space on the borders of the image}
-
-\item{resize_width}{resize after cropping to this specified width}
 
 \item{light}{logical indicating to remove light effects due to scanning}
 
@@ -40,7 +34,8 @@ library(magick)
 library(image.textlinedetector)
 path  <- system.file(package = "image.textlinedetector", "extdata", "example.png")
 img   <- image_read(path)
-areas <- image_textlines_flor(img, crop = TRUE, light = TRUE, type = "sauvola")
+img   <- image_textlines_crop(img)
+areas <- image_textlines_flor(img, light = TRUE, type = "sauvola")
 areas$n
 areas$overview
 combined <- lapply(areas$textlines, FUN=function(x) image_read(ocv_bitmap(x)))

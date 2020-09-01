@@ -44,6 +44,7 @@ path  <- system.file(package = "image.textlinedetector", "extdata", "example.png
 img   <- image_read(path)
 img   <- image_binarization(img, type = "su")
 areas <- image_textlines_astar(img, morph = TRUE, step = 2, mfactor = 5)
+areas <- lines(areas, img, channels = "bgr")
 areas$n
 areas$overview
 areas$lines
@@ -62,12 +63,16 @@ combined
 ```{r}
 library(opencv)
 library(magick)
+library(image.binarization)
 library(image.textlinedetector)
-path  <- system.file(package = "image.textlinedetector", "extdata", "example.png")
-img   <- image_read(path)
-areas <- image_textlines_flor(img, crop = TRUE, light = TRUE, type = "sauvola")
+path   <- system.file(package = "image.textlinedetector", "extdata", "example.png")
+img    <- image_read(path)
+img    <- image_textlines_crop(img)
+img_bw <- image_binarization(img, type = "isauvola")
+areas  <- image_textlines_flor(img, light = TRUE, type = "sauvola")
 areas$overview
 areas$textlines[[6]]
+areas  <- lines(areas, img_bw, channels = "gray")
 textwords <- image_wordsegmentation(areas$textlines[[6]])
 textwords$n
 textwords$overview

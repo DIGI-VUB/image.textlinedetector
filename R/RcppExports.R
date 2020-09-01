@@ -13,6 +13,10 @@ cvmat_rect <- function(ptr, x, y, width = 0L, height = 0L) {
     .Call('_image_textlinedetector_cvmat_rect', PACKAGE = 'image.textlinedetector', ptr, x, y, width, height)
 }
 
+cvmat_polygon <- function(ptr, pts, convex = FALSE, crop = FALSE, color = 255L) {
+    .Call('_image_textlinedetector_cvmat_polygon', PACKAGE = 'image.textlinedetector', ptr, pts, convex, crop, color)
+}
+
 cvmat_destroy <- function(image) {
     invisible(.Call('_image_textlinedetector_cvmat_destroy', PACKAGE = 'image.textlinedetector', image))
 }
