@@ -33,6 +33,7 @@ library(magick)
 library(image.textlinedetector)
 path  <- system.file(package = "image.textlinedetector", "extdata", "example.png")
 img   <- image_read(path)
+img   <- image_resize(img, "x1000")
 areas <- image_textlines_flor(img, light = TRUE, type = "sauvola")
 areas$overview
 areas$textlines[[6]]

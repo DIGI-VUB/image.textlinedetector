@@ -91,6 +91,7 @@ image_textlines_crop <- function(x){
 #' library(image.textlinedetector)
 #' path  <- system.file(package = "image.textlinedetector", "extdata", "example.png")
 #' img   <- image_read(path)
+#' img   <- image_resize(img, "x1000")
 #' areas <- image_textlines_flor(img, light = TRUE, type = "sauvola")
 #' areas$overview
 #' areas$textlines[[6]]
@@ -127,13 +128,11 @@ image_wordsegmentation <- function(x, kernelSize = 11L, sigma = 11L, theta = 7L)
 #' @examples 
 #' library(opencv)
 #' library(magick)
-#' library(image.binarization)
 #' library(image.textlinedetector)
 #' path   <- system.file(package = "image.textlinedetector", "extdata", "example.png")
-#' path   <- system.file("extdata", "doxa-example.png", package = "image.binarization")
 #' img    <- image_read(path)
-#' img_bw <- image_binarization(img, type = "su")
-#' areas  <- image_textlines_astar(img_bw, morph = TRUE, step = 2, mfactor = 5, trace = TRUE)
+#' img    <- image_resize(img, "x1000")
+#' areas  <- image_textlines_astar(img, morph = TRUE, step = 2, mfactor = 5, trace = TRUE)
 #' areas  <- lines(areas, img)
 #' areas$n
 #' areas$overview
