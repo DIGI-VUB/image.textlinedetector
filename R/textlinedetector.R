@@ -14,10 +14,11 @@
 #' library(opencv)
 #' library(magick)
 #' library(image.textlinedetector)
-#' path  <- system.file(package = "image.textlinedetector", "extdata", "example.png")
-#' img   <- image_read(path)
-#' img   <- image_textlines_crop(img)
-#' areas <- image_textlines_flor(img, light = TRUE, type = "sauvola")
+#' path   <- system.file(package = "image.textlinedetector", "extdata", "example.png")
+#' img    <- image_read(path)
+#' imgrgb <- image_textlines_crop(img)
+#' areas  <- image_textlines_flor(imgrgb, light = TRUE, type = "sauvola")
+#' areas  <- lines(areas, img)
 #' areas$n
 #' areas$overview
 #' combined <- lapply(areas$textlines, FUN=function(x) image_read(ocv_bitmap(x)))
