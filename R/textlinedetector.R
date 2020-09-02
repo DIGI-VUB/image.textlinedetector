@@ -38,6 +38,7 @@ image_textlines_flor <- function(x, light = TRUE, type = c("none", "niblack", "s
   }
   out <- textlinedetector_linesegmentation(img)
   class(out) <- c("textlines", "flor")
+  out <- lines(out, img)
   out
 }
 
@@ -155,6 +156,7 @@ image_textlines_astar <- function(x, morph = FALSE, step = 2, mfactor = 5, trace
   x <- cvmat_bw(x, width = width, height = height)
   out <- textlinedetector_astarpath(x, morph = morph, step = step, mfactor = mfactor, trace = trace)
   class(out) <- c("textlines", "astarpath")
+  out <- lines(out, x)
   out
 }
 
@@ -172,15 +174,19 @@ image_textlines_astar <- function(x, morph = FALSE, step = 2, mfactor = 5, trace
 #' ## See the examples in ?image_textlines_astar or ?image_textlines_flor
 lines.textlines <- function(x, image, crop = TRUE, channels = c("bgr", "gray"), ...){
   channels <- match.arg(channels)
-  stopifnot(inherits(image, "magick-image"))
-  width   <- image_info(image)$width
-  height  <- image_info(image)$height
-  if(channels == "bgr"){
-    img_bgr <- image_data(image, channels = "bgr")
-    img_bgr <- cvmat_bgr(img_bgr, width = width, height = height)  
-  }else if(channels == "gray"){
-    img_bgr <- image_data(image, channels = "gray")
-    img_bgr <- cvmat_bw(img_bgr, width = width, height = height)  
+  stopifnot(inherits(image, "magick-image") || inherits(image, "opencv-image"))
+  if(inherits(image, "magick-image")){
+    width   <- image_info(image)$width
+    height  <- image_info(image)$height
+    if(channels == "bgr"){
+      img_bgr <- image_data(image, channels = "bgr")
+      img_bgr <- cvmat_bgr(img_bgr, width = width, height = height)  
+    }else if(channels == "gray"){
+      img_bgr <- image_data(image, channels = "gray")
+      img_bgr <- cvmat_bw(img_bgr, width = width, height = height)  
+    } 
+  }else{
+    img_bgr <- image
   }
   if(x$n > 0){
     pts <- c(list(data.frame(ocv_points(img_bgr, type = c("topleft", "topright"))[c("x", "y")])), x$paths,
