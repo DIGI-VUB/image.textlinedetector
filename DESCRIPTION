@@ -18,7 +18,8 @@ Encoding: UTF-8
 LazyData: true
 Imports:
     Rcpp (>= 0.12.9),
-    magick
+    magick,
+    graphics
 Suggests:
     opencv
 LinkingTo: Rcpp
