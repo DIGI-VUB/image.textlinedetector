@@ -38,7 +38,7 @@ image_textlines_flor <- function(x, light = TRUE, type = c("none", "niblack", "s
   }
   out <- textlinedetector_linesegmentation(img)
   class(out) <- c("textlines", "flor")
-  out <- lines(out, img)
+  out <- lines.textlines(out, img)
   out
 }
 
@@ -156,7 +156,7 @@ image_textlines_astar <- function(x, morph = FALSE, step = 2, mfactor = 5, trace
   x <- cvmat_bw(x, width = width, height = height)
   out <- textlinedetector_astarpath(x, morph = morph, step = step, mfactor = mfactor, trace = trace)
   class(out) <- c("textlines", "astarpath")
-  out <- lines(out, x)
+  out <- lines.textlines(out, x)
   out
 }
 
