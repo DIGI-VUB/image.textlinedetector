@@ -17,8 +17,12 @@
 #' path   <- system.file(package = "image.textlinedetector", "extdata", "example.png")
 #' img    <- image_read(path)
 #' imgrgb <- image_textlines_crop(img)
+#' imgrgb
+#' \dontshow{
+#' imgrgb <- image_resize(imgrgb, "1000x")
+#' }
 #' areas  <- image_textlines_flor(imgrgb, light = TRUE, type = "sauvola")
-#' areas  <- lines(areas, img)
+#' areas  <- lines(areas, imgrgb)
 #' areas$n
 #' areas$overview
 #' combined <- lapply(areas$textlines, FUN=function(x) image_read(ocv_bitmap(x)))
