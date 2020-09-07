@@ -67,7 +67,9 @@ library(image.binarization)
 library(image.textlinedetector)
 path   <- system.file(package = "image.textlinedetector", "extdata", "example.png")
 img    <- image_read(path)
+img    <- image_resize(img, "1600x")
 img    <- image_textlines_crop(img)
+img
 img_bw <- image_binarization(img, type = "isauvola")
 areas  <- image_textlines_flor(img, light = TRUE, type = "sauvola")
 areas$overview
