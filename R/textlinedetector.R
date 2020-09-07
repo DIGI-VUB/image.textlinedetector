@@ -16,18 +16,15 @@
 #' library(image.textlinedetector)
 #' path   <- system.file(package = "image.textlinedetector", "extdata", "example.png")
 #' img    <- image_read(path)
-#' imgrgb <- image_textlines_crop(img)
-#' imgrgb
-#' \dontshow{
-#' imgrgb <- image_resize(imgrgb, "1000x")
-#' }
-#' areas  <- image_textlines_flor(imgrgb, light = TRUE, type = "sauvola")
-#' areas  <- lines(areas, imgrgb)
+#' img    <- image_resize(img, "1000x")
+#' areas  <- image_textlines_flor(img, light = TRUE, type = "sauvola")
+#' areas  <- lines(areas, img)
 #' areas$n
 #' areas$overview
 #' combined <- lapply(areas$textlines, FUN=function(x) image_read(ocv_bitmap(x)))
 #' combined <- do.call(c, combined)
 #' combined
+#' image_append(combined, stack = TRUE)
 image_textlines_flor <- function(x, light = TRUE, type = c("none", "niblack", "sauvola", "wolf")){
   stopifnot(inherits(x, "magick-image"))
   type <- match.arg(type)
@@ -145,6 +142,7 @@ image_wordsegmentation <- function(x, kernelSize = 11L, sigma = 11L, theta = 7L)
 #' combined <- lapply(areas$textlines, FUN=function(x) image_read(ocv_bitmap(x)))
 #' combined <- do.call(c, combined)
 #' combined
+#' image_append(combined, stack = TRUE)
 #' 
 #' plt <- image_draw(img)
 #' lapply(areas$paths, FUN=function(line){

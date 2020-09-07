@@ -67,15 +67,13 @@ library(image.binarization)
 library(image.textlinedetector)
 path   <- system.file(package = "image.textlinedetector", "extdata", "example.png")
 img    <- image_read(path)
-img    <- image_resize(img, "1600x")
-img    <- image_textlines_crop(img)
 img
 img_bw <- image_binarization(img, type = "isauvola")
 areas  <- image_textlines_flor(img, light = TRUE, type = "sauvola")
 areas$overview
 areas$textlines[[6]]
 areas  <- lines(areas, img_bw, channels = "gray")
-textwords <- image_wordsegmentation(areas$textlines[[6]])
+textwords <- image_wordsegmentation(areas$textlines[[10]])
 textwords$n
 textwords$overview
 textwords$words[[2]]

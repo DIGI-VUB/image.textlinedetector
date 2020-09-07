@@ -47,6 +47,7 @@ areas$textlines[[4]]
 combined <- lapply(areas$textlines, FUN=function(x) image_read(ocv_bitmap(x)))
 combined <- do.call(c, combined)
 combined
+image_append(combined, stack = TRUE)
 
 plt <- image_draw(img)
 lapply(areas$paths, FUN=function(line){
