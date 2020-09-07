@@ -16,6 +16,7 @@ Description: Find text lines in scanned images and segment the lines into words.
     an implementation of 'A Statistical approach to line segmentation in handwritten documents' by Arivazhagan M. et al (2007) <doi:10.1.1.88.5806>, 
     and a wrapper for an image segmentation technique to detect words in text lines as described in the paper 'Scale Space Technique for Word Segmentation in Handwritten Documents' by Manmatha R. and Srimal N. (1999) paper at <doi:10.1007/3-540-48236-9_3>, wrapper for code available at <https://github.com/arthurflor23/text-segmentation>.
 License: MIT + file LICENSE
+URL: https://github.com/DIGI-VUB/image.textlinedetector
 Encoding: UTF-8
 LazyData: true
 Imports:
