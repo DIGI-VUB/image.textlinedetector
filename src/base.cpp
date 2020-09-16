@@ -106,18 +106,18 @@ cv::Mat get_mat(XPtrMat image){
 //   return cvmat_xptr(output);
 // }
 // 
-// // [[Rcpp::export]]
-// Rcpp::RawVector cvmat_bitmap(XPtrMat ptr){
-//   cv::Mat output;
-//   cv::Mat input = get_mat(ptr);
-//   cvtColor(input, output, COLOR_BGR2RGB);
-//   size_t size = output.total();
-//   size_t channels = output.channels();
-//   Rcpp::RawVector res(size * channels);
-//   std::memcpy(res.begin(), output.datastart, size * channels);
-//   res.attr("dim") = Rcpp::NumericVector::create(channels, output.cols, output.rows);
-//   return res;
-// }
+// [[Rcpp::export]]
+Rcpp::RawVector cvmat_bitmap(XPtrMat ptr){
+  cv::Mat output;
+  cv::Mat input = get_mat(ptr);
+  cvtColor(input, output, COLOR_BGR2RGB);
+  size_t size = output.total();
+  size_t channels = output.channels();
+  Rcpp::RawVector res(size * channels);
+  std::memcpy(res.begin(), output.datastart, size * channels);
+  res.attr("dim") = Rcpp::NumericVector::create(channels, output.cols, output.rows);
+  return res;
+}
 // 
 // 
 // 
@@ -128,14 +128,14 @@ cv::Mat get_mat(XPtrMat image){
 //   return out;
 // }
 // 
-// // [[Rcpp::export]]
-// Rcpp::List cvmat_info(XPtrMat image){
-//   return Rcpp::List::create(
-//     Rcpp::_["width"] = get_mat(image).cols,
-//     Rcpp::_["height"] = get_mat(image).rows,
-//     Rcpp::_["channels"] = get_mat(image).channels()
-//   );
-// }
+// [[Rcpp::export]]
+Rcpp::List cvmat_info(XPtrMat image){
+  return Rcpp::List::create(
+    Rcpp::_["width"] = get_mat(image).cols,
+    Rcpp::_["height"] = get_mat(image).rows,
+    Rcpp::_["channels"] = get_mat(image).channels()
+  );
+}
 // 
 // // [[Rcpp::export]]
 // void cvmat_display(XPtrMat ptr){

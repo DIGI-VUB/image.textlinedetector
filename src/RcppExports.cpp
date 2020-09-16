@@ -61,6 +61,28 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// cvmat_bitmap
+Rcpp::RawVector cvmat_bitmap(XPtrMat ptr);
+RcppExport SEXP _image_textlinedetector_cvmat_bitmap(SEXP ptrSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrMat >::type ptr(ptrSEXP);
+    rcpp_result_gen = Rcpp::wrap(cvmat_bitmap(ptr));
+    return rcpp_result_gen;
+END_RCPP
+}
+// cvmat_info
+Rcpp::List cvmat_info(XPtrMat image);
+RcppExport SEXP _image_textlinedetector_cvmat_info(SEXP imageSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrMat >::type image(imageSEXP);
+    rcpp_result_gen = Rcpp::wrap(cvmat_info(image));
+    return rcpp_result_gen;
+END_RCPP
+}
 // textlinedetector_astarpath
 Rcpp::List textlinedetector_astarpath(XPtrMat ptr, bool morph, int step, int mfactor, bool trace);
 RcppExport SEXP _image_textlinedetector_textlinedetector_astarpath(SEXP ptrSEXP, SEXP morphSEXP, SEXP stepSEXP, SEXP mfactorSEXP, SEXP traceSEXP) {
@@ -148,6 +170,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_image_textlinedetector_cvmat_bw", (DL_FUNC) &_image_textlinedetector_cvmat_bw, 3},
     {"_image_textlinedetector_cvmat_rect", (DL_FUNC) &_image_textlinedetector_cvmat_rect, 5},
     {"_image_textlinedetector_cvmat_polygon", (DL_FUNC) &_image_textlinedetector_cvmat_polygon, 5},
+    {"_image_textlinedetector_cvmat_bitmap", (DL_FUNC) &_image_textlinedetector_cvmat_bitmap, 1},
+    {"_image_textlinedetector_cvmat_info", (DL_FUNC) &_image_textlinedetector_cvmat_info, 1},
     {"_image_textlinedetector_textlinedetector_astarpath", (DL_FUNC) &_image_textlinedetector_textlinedetector_astarpath, 5},
     {"_image_textlinedetector_textlinedetector_crop", (DL_FUNC) &_image_textlinedetector_textlinedetector_crop, 1},
     {"_image_textlinedetector_textlinedetector_resize", (DL_FUNC) &_image_textlinedetector_textlinedetector_resize, 2},

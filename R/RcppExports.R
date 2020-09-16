@@ -17,6 +17,14 @@ cvmat_polygon <- function(ptr, pts, convex = FALSE, crop = FALSE, color = 255L) 
     .Call('_image_textlinedetector_cvmat_polygon', PACKAGE = 'image.textlinedetector', ptr, pts, convex, crop, color)
 }
 
+cvmat_bitmap <- function(ptr) {
+    .Call('_image_textlinedetector_cvmat_bitmap', PACKAGE = 'image.textlinedetector', ptr)
+}
+
+cvmat_info <- function(image) {
+    .Call('_image_textlinedetector_cvmat_info', PACKAGE = 'image.textlinedetector', image)
+}
+
 textlinedetector_astarpath <- function(ptr, morph = TRUE, step = 2L, mfactor = 5L, trace = TRUE) {
     .Call('_image_textlinedetector_textlinedetector_astarpath', PACKAGE = 'image.textlinedetector', ptr, morph, step, mfactor, trace)
 }
