@@ -293,7 +293,9 @@ namespace std {
     inline size_t operator() (const tuple<int,int>& node) const {
       int x, y;
       tie (x, y) = node;
-      return x * 1812433253 + y;
+      hash<std::string> hasher;
+      return hasher(std::to_string(x) + "x" + std::to_string(y));
+      //return x * 1812433253 + y;
     }
   };
 }
