@@ -49,3 +49,7 @@ textlinedetector_wordsegmentation <- function(ptr, kernelSize = 11L, sigma = 11L
     .Call('_image_textlinedetector_textlinedetector_wordsegmentation', PACKAGE = 'image.textlinedetector', ptr, kernelSize, sigma, theta)
 }
 
+sieve <- function(original = TRUE) {
+    .Call('_image_textlinedetector_sieve', PACKAGE = 'image.textlinedetector', original)
+}
+

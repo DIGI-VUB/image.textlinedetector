@@ -28,13 +28,16 @@ void LineSegmentation::segment(Mat &input, vector<Mat> &output, int chunksNumber
 }
 
 void LineSegmentation::sieve() {
-    notPrimesArr[0] = notPrimesArr[1] = 1;
+    for (int i=0; i<1e5; ++i) {
+        notPrimesArr[i] = false;
+    }
+    notPrimesArr[0] = notPrimesArr[1] = true;
     for (int i=2; i<1e5; ++i) {
         if (notPrimesArr[i]) continue;
 
         primes.push_back(i);
         for (int j=i*2; j<1e5; j += i) {
-            notPrimesArr[j] = 1;
+            notPrimesArr[j] = true;
         }
     }
 }

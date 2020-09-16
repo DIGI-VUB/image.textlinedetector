@@ -164,6 +164,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// sieve
+std::vector<int> sieve(bool original);
+RcppExport SEXP _image_textlinedetector_sieve(SEXP originalSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< bool >::type original(originalSEXP);
+    rcpp_result_gen = Rcpp::wrap(sieve(original));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_image_textlinedetector_cvmat_bgr", (DL_FUNC) &_image_textlinedetector_cvmat_bgr, 3},
@@ -178,6 +189,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_image_textlinedetector_textlinedetector_binarization", (DL_FUNC) &_image_textlinedetector_textlinedetector_binarization, 3},
     {"_image_textlinedetector_textlinedetector_linesegmentation", (DL_FUNC) &_image_textlinedetector_textlinedetector_linesegmentation, 6},
     {"_image_textlinedetector_textlinedetector_wordsegmentation", (DL_FUNC) &_image_textlinedetector_textlinedetector_wordsegmentation, 4},
+    {"_image_textlinedetector_sieve", (DL_FUNC) &_image_textlinedetector_sieve, 1},
     {NULL, NULL, 0}
 };
 
