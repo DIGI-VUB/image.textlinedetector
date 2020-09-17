@@ -1,3 +1,7 @@
+### CHANGES IN image.textlinedetector VERSION 0.1.2
+
+- Use C++11 instead of C++17 in Makevars.win
+
 ### CHANGES IN image.textlinedetector VERSION 0.1.1
 
 - Updated SystemRequirements (OpenCV 3 or newer)
