@@ -12,7 +12,18 @@ matrix:
           packages:
             - libopencv-dev
             - opencv-data
-            - libmagick++-dev            
+            - libmagick++-dev     
+    - dist: bionic # backported 4.2 branch
+      addons:
+        apt:
+          update: true
+          sources:
+            - sourceline: 'ppa:cran/opencv-4.2'
+            - sourceline: 'ppa:cran/imagemagick'
+          packages:
+            - libopencv-dev
+            - opencv-data
+            - libmagick++-dev     
     - dist: xenial # up-to-date 3.4 branch
       addons:
         apt:
