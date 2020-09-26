@@ -9,21 +9,22 @@ matrix:
     - dist: bionic
       addons:
         apt:
+          sources:
+            - sourceline: 'ppa:cran/imagemagick-dev'
           packages:
             - libopencv-dev
             - opencv-data
-            - libmagick++-dev     
+            - libmagick++-dev
     - dist: bionic # backported 4.2 branch
       addons:
         apt:
-          update: true
           sources:
             - sourceline: 'ppa:cran/opencv-4.2'
             - sourceline: 'ppa:cran/imagemagick'
           packages:
             - libopencv-dev
             - opencv-data
-            - libmagick++-dev     
+            - libmagick++-dev
     - dist: xenial # up-to-date 3.4 branch
       addons:
         apt:
@@ -48,17 +49,17 @@ matrix:
             - opencv-data
             - libmagick++-dev
     - os: osx
-      brew_packages: 
+      brew_packages:
         - opencv
         - imagemagick@6
       env: PKG_CONFIG_PATH="/usr/local/opt/opencv/lib/pkgconfig"
     - os: osx
-      brew_packages: 
+      brew_packages:
         - opencv@3
         - imagemagick@6
       env: PKG_CONFIG_PATH="/usr/local/opt/opencv@3/lib/pkgconfig"
     - os: osx
-      brew_packages: 
+      brew_packages:
         - opencv@2
         - imagemagick@6
       env: PKG_CONFIG_PATH="/usr/local/opt/opencv@2/lib/pkgconfig"
