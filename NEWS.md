@@ -1,6 +1,6 @@
 ### CHANGES IN image.textlinedetector VERSION 0.1.3
 
-- Update configure script, using new autobrew location https://autobrew.github.io/scripts/opencv
+- Update configure script, using new autobrew location https://autobrew.github.io/scripts/opencv, using sh instead of bash
 - Windows uses now opencv 4.4.0
 
 ### CHANGES IN image.textlinedetector VERSION 0.1.2
