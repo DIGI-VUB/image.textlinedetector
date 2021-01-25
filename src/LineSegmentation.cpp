@@ -120,9 +120,9 @@ void LineSegmentation::generateChunks() {
 
     for (int i=0, startPixel=0; i<chunksNumber; ++i) {
         Chunk *c = new Chunk(
-            i, 
-            startPixel, 
-            chunkWidth, 
+            i,
+            startPixel,
+            chunkWidth,
             Mat(binaryImg, cv::Range(0, binaryImg.rows), cv::Range(startPixel, startPixel + chunkWidth)));
 
         this->chunks.push_back(c);
@@ -229,7 +229,7 @@ void LineSegmentation::repairLines() {
     for (Line *line : initialLines) {
         map<int, bool> columnProcessed = map<int, bool>();
         for (unsigned int i=0; i<line->points.size(); i++) {
-            int x = (line->points[i]).x, y = (line->points[i]).y;
+            int y = (line->points[i]).y;
             columnProcessed[y] = false;
         }
 
