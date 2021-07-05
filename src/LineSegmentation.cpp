@@ -229,13 +229,15 @@ void LineSegmentation::repairLines() {
     for (Line *line : initialLines) {
         map<int, bool> columnProcessed = map<int, bool>();
         for (unsigned int i=0; i<line->points.size(); i++) {
-            int x = (line->points[i]).x, y = (line->points[i]).y;
+            //int x = (line->points[i]).x;
+            int y = (line->points[i]).y;
             columnProcessed[y] = false;
         }
 
         for (unsigned int i=0; i<line->points.size(); i++) {
             Point &point = line->points[i];
-            int x = (line->points[i]).x, y = (line->points[i]).y;
+            int x = (line->points[i]).x;
+            int y = (line->points[i]).y;
 
             if (this->binaryImg.at<uchar>(point.x, point.y) == 255) {
                 if (i == 0) continue;

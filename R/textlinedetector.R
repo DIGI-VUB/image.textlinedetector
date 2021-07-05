@@ -144,12 +144,14 @@ image_wordsegmentation <- function(x, kernelSize = 11L, sigma = 11L, theta = 7L)
 #' combined
 #' image_append(combined, stack = TRUE)
 #' 
+#' \donttest{
 #' plt <- image_draw(img)
 #' lapply(areas$paths, FUN=function(line){
 #'   lines(x = line$x, y = line$y, col = "red")  
 #' })
 #' dev.off()
 #' plt
+#' }
 image_textlines_astar <- function(x, morph = FALSE, step = 2, mfactor = 5, trace = FALSE){
   stopifnot(inherits(x, "magick-image"))
   width  <- image_info(x)$width

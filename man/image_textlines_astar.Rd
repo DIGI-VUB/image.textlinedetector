@@ -49,10 +49,12 @@ combined <- do.call(c, combined)
 combined
 image_append(combined, stack = TRUE)
 
+\donttest{
 plt <- image_draw(img)
 lapply(areas$paths, FUN=function(line){
   lines(x = line$x, y = line$y, col = "red")  
 })
 dev.off()
 plt
+}
 }

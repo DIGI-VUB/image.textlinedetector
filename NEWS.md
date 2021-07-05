@@ -1,3 +1,9 @@
+### CHANGES IN image.textlinedetector VERSION 0.1.4
+
+- Remove LazyData from DESCRIPTION as there is no data to be lazy about
+- Put example with image_draw in donttest block
+- Comment out C++ code with unused variables
+
 ### CHANGES IN image.textlinedetector VERSION 0.1.3
 
 - Update configure script, using new autobrew location https://autobrew.github.io/scripts/opencv, using sh instead of bash
