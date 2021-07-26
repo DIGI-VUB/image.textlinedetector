@@ -1,3 +1,7 @@
+### CHANGES IN image.textlinedetector VERSION 0.1.5
+
+- Makevars fix for Windows UCRT toolchain
+
 ### CHANGES IN image.textlinedetector VERSION 0.1.4
 
 - Remove LazyData from DESCRIPTION as there is no data to be lazy about
