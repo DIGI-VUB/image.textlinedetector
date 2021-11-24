@@ -7,10 +7,10 @@
 \usage{
 ocv_deslant(image, bgcolor = 255, lower_bound = -1, upper_bound = 1)
 
-image_deslant(image, bgcolor = 255, lower_bound = -1, upper_bound = 1, ...)
+image_deslant(image, bgcolor = 255, lower_bound = -1, upper_bound = 1)
 }
 \arguments{
-\item{image}{an object of class opencv-image (ocv_deslant) with pixel values between 0 and 255 or a magick-image (image_deslant)}
+\item{image}{an object of class opencv-image (for \code{ocv_deslant}) with pixel values between 0 and 255 or a magick-image (for \code{image_deslant})}
 
 \item{bgcolor}{integer value with the background color to use to fill the gaps of the sheared image that is returned. Defaults to white: 255}
 
@@ -25,8 +25,8 @@ an object of class opencv-image with the deslanted image
 This algorithm sets handwritten text in images upright by removing cursive writing style. 
 One can use it as a preprocessing step for handwritten text recognition.\cr
 \itemize{
-\item{ocv_deslant expects a magick-image and does not performs grayscaling}
-\item{image_deslant expects a magick-image and performs grayscaling when calling the function}
+\item{\code{image_deslant} expects a magick-image and performs grayscaling before doing deslanting}
+\item{\code{ocv_deslant} expects a ocv-image and does not perform grayscaling before doing deslanting}
 }
 }
 \examples{
@@ -44,6 +44,7 @@ up   <- ocv_deslant(img)
 up
 
 img  <- image_read(path)
+img
 image_deslant(img)
 \dontshow{
 \}

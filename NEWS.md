@@ -1,6 +1,6 @@
 ### CHANGES IN image.textlinedetector VERSION 0.2.0
 
-- Added ocv_deslant
+- Added ocv_deslant / image_deslant
 
 ### CHANGES IN image.textlinedetector VERSION 0.1.5
 
