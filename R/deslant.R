@@ -11,7 +11,7 @@
 #' @param lower_bound lower bound of shear values. Defaults to -1
 #' @param upper_bound upper bound of shear values. Defaults to 1
 #' @export 
-#' @return an object of class opencv-image with the deslanted image
+#' @return an object of class opencv-image or magick-image with the deslanted image
 #' @examples 
 #' \dontshow{
 #' if(require(opencv)) \{

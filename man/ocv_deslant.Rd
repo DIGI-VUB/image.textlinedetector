@@ -19,7 +19,7 @@ image_deslant(image, bgcolor = 255, lower_bound = -1, upper_bound = 1)
 \item{upper_bound}{upper bound of shear values. Defaults to 1}
 }
 \value{
-an object of class opencv-image with the deslanted image
+an object of class opencv-image or magick-image with the deslanted image
 }
 \description{
 This algorithm sets handwritten text in images upright by removing cursive writing style. 
