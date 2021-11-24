@@ -5,6 +5,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // cvmat_bgr
 XPtrMat cvmat_bgr(Rcpp::RawVector img, int width, int height);
 RcppExport SEXP _image_textlinedetector_cvmat_bgr(SEXP imgSEXP, SEXP widthSEXP, SEXP heightSEXP) {
@@ -80,6 +85,20 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< XPtrMat >::type image(imageSEXP);
     rcpp_result_gen = Rcpp::wrap(cvmat_info(image));
+    return rcpp_result_gen;
+END_RCPP
+}
+// textlinedetector_deslant
+XPtrMat textlinedetector_deslant(XPtrMat ptr, const int bgcolor, const float lower_bound, const float upper_bound);
+RcppExport SEXP _image_textlinedetector_textlinedetector_deslant(SEXP ptrSEXP, SEXP bgcolorSEXP, SEXP lower_boundSEXP, SEXP upper_boundSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< XPtrMat >::type ptr(ptrSEXP);
+    Rcpp::traits::input_parameter< const int >::type bgcolor(bgcolorSEXP);
+    Rcpp::traits::input_parameter< const float >::type lower_bound(lower_boundSEXP);
+    Rcpp::traits::input_parameter< const float >::type upper_bound(upper_boundSEXP);
+    rcpp_result_gen = Rcpp::wrap(textlinedetector_deslant(ptr, bgcolor, lower_bound, upper_bound));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -183,6 +202,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_image_textlinedetector_cvmat_polygon", (DL_FUNC) &_image_textlinedetector_cvmat_polygon, 5},
     {"_image_textlinedetector_cvmat_bitmap", (DL_FUNC) &_image_textlinedetector_cvmat_bitmap, 1},
     {"_image_textlinedetector_cvmat_info", (DL_FUNC) &_image_textlinedetector_cvmat_info, 1},
+    {"_image_textlinedetector_textlinedetector_deslant", (DL_FUNC) &_image_textlinedetector_textlinedetector_deslant, 4},
     {"_image_textlinedetector_textlinedetector_astarpath", (DL_FUNC) &_image_textlinedetector_textlinedetector_astarpath, 5},
     {"_image_textlinedetector_textlinedetector_crop", (DL_FUNC) &_image_textlinedetector_textlinedetector_crop, 1},
     {"_image_textlinedetector_textlinedetector_resize", (DL_FUNC) &_image_textlinedetector_textlinedetector_resize, 2},

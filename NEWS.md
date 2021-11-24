@@ -1,3 +1,7 @@
+### CHANGES IN image.textlinedetector VERSION 0.2.0
+
+- Added ocv_deslant
+
 ### CHANGES IN image.textlinedetector VERSION 0.1.5
 
 - Makevars fix for Windows UCRT toolchain

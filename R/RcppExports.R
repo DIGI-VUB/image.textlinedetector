@@ -25,6 +25,10 @@ cvmat_info <- function(image) {
     .Call('_image_textlinedetector_cvmat_info', PACKAGE = 'image.textlinedetector', image)
 }
 
+textlinedetector_deslant <- function(ptr, bgcolor = 255L, lower_bound = -1.0, upper_bound = 1.0) {
+    .Call('_image_textlinedetector_textlinedetector_deslant', PACKAGE = 'image.textlinedetector', ptr, bgcolor, lower_bound, upper_bound)
+}
+
 textlinedetector_astarpath <- function(ptr, morph = TRUE, step = 2L, mfactor = 5L, trace = TRUE) {
     .Call('_image_textlinedetector_textlinedetector_astarpath', PACKAGE = 'image.textlinedetector', ptr, morph, step, mfactor, trace)
 }
