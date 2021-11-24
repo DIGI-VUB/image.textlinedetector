@@ -1,11 +1,11 @@
 
-#' @title Deslant images 
+#' @title Deslant images by putting cursive text upright
 #' @description This algorithm sets handwritten text in images upright by removing cursive writing style. 
 #' One can use it as a preprocessing step for handwritten text recognition.
 #' @param x an object of class opencv-image with pixel values between 0 and 255
-#' @param col integer value with the background color to use to fill the gaps of the sheared image that is returned. Defaults to white: 255
-#' @param lower lower bound of shear values. Defaults to -1
-#' @param upper upper bound of shear values. Defaults to 1
+#' @param bgcolor integer value with the background color to use to fill the gaps of the sheared image that is returned. Defaults to white: 255
+#' @param lower_bound lower bound of shear values. Defaults to -1
+#' @param upper_bound upper bound of shear values. Defaults to 1
 #' @export 
 #' @return an object of class opencv-image with the deslanted image
 #' @examples 
