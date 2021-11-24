@@ -2,12 +2,15 @@
 % Please edit documentation in R/deslant.R
 \name{ocv_deslant}
 \alias{ocv_deslant}
+\alias{image_deslant}
 \title{Deslant images by putting cursive text upright}
 \usage{
-ocv_deslant(x, bgcolor = 255, lower_bound = -1, upper_bound = 1)
+ocv_deslant(image, bgcolor = 255, lower_bound = -1, upper_bound = 1)
+
+image_deslant(image, bgcolor = 255, lower_bound = -1, upper_bound = 1, ...)
 }
 \arguments{
-\item{x}{an object of class opencv-image with pixel values between 0 and 255}
+\item{image}{an object of class opencv-image (ocv_deslant) with pixel values between 0 and 255 or a magick-image (image_deslant)}
 
 \item{bgcolor}{integer value with the background color to use to fill the gaps of the sheared image that is returned. Defaults to white: 255}
 
@@ -20,12 +23,17 @@ an object of class opencv-image with the deslanted image
 }
 \description{
 This algorithm sets handwritten text in images upright by removing cursive writing style. 
-One can use it as a preprocessing step for handwritten text recognition.
+One can use it as a preprocessing step for handwritten text recognition.\cr
+\itemize{
+\item{ocv_deslant expects a magick-image and does not performs grayscaling}
+\item{image_deslant expects a magick-image and performs grayscaling when calling the function}
+}
 }
 \examples{
 \dontshow{
 if(require(opencv)) \{
 }
+library(magick)
 library(opencv)
 library(image.textlinedetector)
 path <- system.file(package = "image.textlinedetector", "extdata", "cursive.png")
@@ -34,6 +42,9 @@ img  <- ocv_grayscale(img)
 img
 up   <- ocv_deslant(img)
 up
+
+img  <- image_read(path)
+image_deslant(img)
 \dontshow{
 \}
 # End of main if statement running only if the required packages are installed
