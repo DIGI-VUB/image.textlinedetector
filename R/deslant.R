@@ -18,8 +18,8 @@
 #' img  <- ocv_read(path)
 #' img  <- ocv_grayscale(img)
 #' img
-#' img  <- ocv_deslant(img)
-#' img
+#' up   <- ocv_deslant(img)
+#' up
 #' \dontshow{
 #' \}
 #' # End of main if statement running only if the required packages are installed
