@@ -33,7 +33,7 @@ SOFTWARE.
 ===========================================================================================
 
 - Files in the src directory: DeslantImgCPU.cpp DeslantImgCPU.hpp
-- The original source code of these can be found at https://github.com/githubharald/DeslantImg
+- The original source code of these can be found at https://github.com/githubharald/DeslantImg commit b7183ff31067e51d8dcba581c6241b15ceb87f28
 - PNG image file inst/extdata/cursive.png
 
 MIT License

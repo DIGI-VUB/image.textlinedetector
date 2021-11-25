@@ -10,7 +10,8 @@ Authors@R: c(
     person("Arthur Flôr", role = c("ctb", "cph"), comment = "More details in LICENSE.note file"),
     person("Saverio Meucci", role = c("ctb", "cph"), comment = "More details in LICENSE.note file"),
     person("Yeara Kozlov", role = c("ctb", "cph"), comment = "More details in LICENSE.note file"),
-    person("Tino Weinkauf", role = c("ctb", "cph"), comment = "More details in LICENSE.note file"))
+    person("Tino Weinkauf", role = c("ctb", "cph"), comment = "More details in LICENSE.note file"),
+    person("Harald Scheidl", role = c("ctb", "cph"), comment = "More details in LICENSE.note file"))
 Description: Find text lines in scanned images and segment the lines into words.
     Includes implementations of the paper 'Novel A* Path Planning Algorithm for Line Segmentation of Handwritten Documents' by Surinta O. et al (2014) <doi:10.1109/ICFHR.2014.37> available at <https://github.com/smeucci/LineSegm>,
     an implementation of 'A Statistical approach to line segmentation in handwritten documents' by Arivazhagan M. et al (2007) <doi:10.1117/12.704538>, 
