@@ -1,3 +1,7 @@
+### CHANGES IN text.alignment VERSION 0.2.1
+
+- Change of maintainer email address
+
 ### CHANGES IN image.textlinedetector VERSION 0.2.0
 
 - Added ocv_deslant / image_deslant

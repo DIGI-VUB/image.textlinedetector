@@ -1,10 +1,10 @@
 Package: image.textlinedetector
 Type: Package
 Title: Segment Images in Text Lines and Words
-Version: 0.2.0
-Maintainer: Jan Wijffels <jan.wijffels@vub.be>
+Version: 0.2.1
+Maintainer: Jan Wijffels <jwijffels@bnosac.be>
 Authors@R: c(
-    person('Jan', 'Wijffels', role = c('aut', 'cre', 'cph'), email = 'jan.wijffels@vub.be', comment = "R wrapper"), 
+    person('Jan', 'Wijffels', role = c('aut', 'cre', 'cph'), email = 'jwijffels@bnosac.be', comment = "R wrapper"), 
     person('Vrije Universiteit Brussel - DIGI: Brussels Platform for Digital Humanities', role = 'cph', comment = "R wrapper"),
     person("Jeroen", "Ooms", role = c("ctb", "cph"), comment = "More details in LICENSE.note file"),
     person("Arthur Flôr", role = c("ctb", "cph"), comment = "More details in LICENSE.note file"),
@@ -27,4 +27,4 @@ Suggests:
     opencv
 LinkingTo: Rcpp
 SystemRequirements: C++11 and OpenCV 3 or newer: libopencv-dev (Debian, Ubuntu) or opencv-devel (Fedora)
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
