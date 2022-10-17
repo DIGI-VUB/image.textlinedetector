@@ -1,7 +1,7 @@
 Package: image.textlinedetector
 Type: Package
 Title: Segment Images in Text Lines and Words
-Version: 0.2.1
+Version: 0.2.2
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
 Authors@R: c(
     person('Jan', 'Wijffels', role = c('aut', 'cre', 'cph'), email = 'jwijffels@bnosac.be', comment = "R wrapper"), 
@@ -26,5 +26,5 @@ Imports:
 Suggests:
     opencv
 LinkingTo: Rcpp
-SystemRequirements: C++11 and OpenCV 3 or newer: libopencv-dev (Debian, Ubuntu) or opencv-devel (Fedora)
+SystemRequirements: C++17 or C++11 and OpenCV 3 or newer: libopencv-dev (Debian, Ubuntu) or opencv-devel (Fedora)
 RoxygenNote: 7.1.2

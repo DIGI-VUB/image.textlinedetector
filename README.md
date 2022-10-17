@@ -7,7 +7,7 @@ Objective of the package is to more easily plug the text lines in Handwritten Te
 The algorithms in this R package implement the following techniques:
 
 1. __An Implementation of a Novel A* Path Planning Algorithm for Line Segmentation of Handwritten Documents__ [paper link](https://github.com/smeucci/LineSegm/blob/master/c%2B%2B/linesegm/docs/relazione.pdf)
-2. __A Statistical approach to line segmentation in handwritten documents__ [paper link](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.88.5806&rep=rep1&type=pdf)
+2. __A Statistical approach to line segmentation in handwritten documents__ [paper link](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.88.5806&rep=rep1&type=pdf)
 3. __A new normalization technique for cursive handwritten words__ [paper link](https://doi.org/10.1016/S0167-8655(01)00042-3)
 
 More descriptions of technique 2 can be found [in this document](https://github.com/arthurflor23/text-segmentation/blob/master/doc/Text%20Segmentation.pdf)

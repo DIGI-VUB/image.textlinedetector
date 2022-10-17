@@ -1,3 +1,7 @@
+### CHANGES IN text.alignment VERSION 0.2.2
+
+- Compile with CXX17 when available to fix compiler warnings
+  
 ### CHANGES IN text.alignment VERSION 0.2.1
 
 - Change of maintainer email address
