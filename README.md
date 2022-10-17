@@ -14,6 +14,7 @@ More descriptions of technique 2 can be found [in this document](https://github.
 
 ### Installation
 
+- For regular users, install the package from your local CRAN mirror `install.packages("image.textlinedetector")`
 - For installing the development version of this package and to execute the example 
 
 ```
