@@ -1,5 +1,9 @@
 ### CHANGES IN text.alignment VERSION 0.2.2
 
+- Windows: update to opencv 4.8.1 with support for arm64.
+
+### CHANGES IN text.alignment VERSION 0.2.2
+
 - Compile with CXX17 when available to fix compiler warnings
   
 ### CHANGES IN text.alignment VERSION 0.2.1
