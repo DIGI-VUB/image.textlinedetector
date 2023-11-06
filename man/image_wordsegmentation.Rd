@@ -28,6 +28,7 @@ Filter the image using the gaussian kernel
 and extract components which are connected which are to be considered as words.
 }
 \examples{
+\donttest{
 library(opencv)
 library(magick)
 library(image.textlinedetector)
@@ -42,4 +43,5 @@ textwords$n
 textwords$overview
 textwords$words[[2]]
 textwords$words[[3]]
+}
 }

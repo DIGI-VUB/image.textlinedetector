@@ -30,6 +30,7 @@ One can use it as a preprocessing step for handwritten text recognition.\cr
 }
 }
 \examples{
+\donttest{
 \dontshow{
 if(require(opencv)) \{
 }
@@ -49,5 +50,6 @@ image_deslant(img)
 \dontshow{
 \}
 # End of main if statement running only if the required packages are installed
+}
 }
 }

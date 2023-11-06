@@ -11,6 +11,7 @@
 #' \item{textlines: a list of opencv-image's, one for each text line area}
 #' }
 #' @examples 
+#' \donttest{
 #' library(opencv)
 #' library(magick)
 #' library(image.textlinedetector)
@@ -25,6 +26,7 @@
 #' combined <- do.call(c, combined)
 #' combined
 #' image_append(combined, stack = TRUE)
+#' }
 image_textlines_flor <- function(x, light = TRUE, type = c("none", "niblack", "sauvola", "wolf")){
   stopifnot(inherits(x, "magick-image"))
   type <- match.arg(type)
@@ -55,6 +57,7 @@ image_textlines_flor <- function(x, light = TRUE, type = c("none", "niblack", "s
 #' @return an object of class magick-image
 #' @export 
 #' @examples 
+#' \donttest{
 #' library(opencv)
 #' library(magick)
 #' library(image.textlinedetector)
@@ -63,6 +66,7 @@ image_textlines_flor <- function(x, light = TRUE, type = c("none", "niblack", "s
 #' image_info(img)
 #' img   <- image_textlines_crop(img)
 #' image_info(img)
+#' }
 image_textlines_crop <- function(x){
   stopifnot(inherits(x, "magick-image"))
   width  <- image_info(x)$width
@@ -89,6 +93,7 @@ image_textlines_crop <- function(x){
 #' \item{words: a list of opencv-image's, one for each word area}
 #' }
 #' @examples 
+#' \donttest{
 #' library(opencv)
 #' library(magick)
 #' library(image.textlinedetector)
@@ -103,6 +108,7 @@ image_textlines_crop <- function(x){
 #' textwords$overview
 #' textwords$words[[2]]
 #' textwords$words[[3]]
+#' }
 image_wordsegmentation <- function(x, kernelSize = 11L, sigma = 11L, theta = 7L){
   out <- textlinedetector_wordsegmentation(x, kernelSize = kernelSize, sigma = sigma, theta = theta)
   out
@@ -126,6 +132,7 @@ image_wordsegmentation <- function(x, kernelSize = 11L, sigma = 11L, theta = 7L)
 #' \item{lines: a data.frame with the x/y positions of the detected lines}
 #' }
 #' @examples 
+#' \donttest{
 #' library(opencv)
 #' library(magick)
 #' library(image.textlinedetector)
@@ -143,6 +150,7 @@ image_wordsegmentation <- function(x, kernelSize = 11L, sigma = 11L, theta = 7L)
 #' combined <- do.call(c, combined)
 #' combined
 #' image_append(combined, stack = TRUE)
+#' }
 #' 
 #' \donttest{
 #' plt <- image_draw(img)

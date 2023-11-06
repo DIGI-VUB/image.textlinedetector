@@ -21,6 +21,7 @@ keep only contours above the mean contour area, find approximated contour lines 
 dilation and thresholding.
 }
 \examples{
+\donttest{
 library(opencv)
 library(magick)
 library(image.textlinedetector)
@@ -29,4 +30,5 @@ img   <- image_read(path)
 image_info(img)
 img   <- image_textlines_crop(img)
 image_info(img)
+}
 }

@@ -13,6 +13,7 @@
 #' @export 
 #' @return an object of class opencv-image or magick-image with the deslanted image
 #' @examples 
+#' \donttest{
 #' \dontshow{
 #' if(require(opencv)) \{
 #' }
@@ -32,6 +33,7 @@
 #' \dontshow{
 #' \}
 #' # End of main if statement running only if the required packages are installed
+#' }
 #' }
 ocv_deslant <- function(image, bgcolor = 255, lower_bound = -1, upper_bound = 1){
   stopifnot(inherits(image, "opencv-image"))
