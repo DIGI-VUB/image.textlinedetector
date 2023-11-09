@@ -1,6 +1,7 @@
 ### CHANGES IN text.alignment VERSION 0.2.3
 
 - Windows: update to opencv 4.8.1 with support for arm64.
+- Wrap examples in donttest to avoid timing issues with magick on cran debian
 
 ### CHANGES IN text.alignment VERSION 0.2.2
 
