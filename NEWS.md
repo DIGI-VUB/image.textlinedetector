@@ -1,3 +1,7 @@
+### CHANGES IN text.alignment VERSION 0.2.4
+
+- Windows: use opencv from Rtools if available on R > 4.5
+
 ### CHANGES IN text.alignment VERSION 0.2.3
 
 - Windows: update to opencv 4.8.1 with support for arm64.
