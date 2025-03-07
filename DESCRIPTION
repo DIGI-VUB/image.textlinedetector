@@ -1,7 +1,7 @@
 Package: image.textlinedetector
 Type: Package
 Title: Segment Images in Text Lines and Words
-Version: 0.2.3
+Version: 0.2.4
 Maintainer: Jan Wijffels <jwijffels@bnosac.be>
 Authors@R: c(
     person('Jan', 'Wijffels', role = c('aut', 'cre', 'cph'), email = 'jwijffels@bnosac.be', comment = "R wrapper"), 
